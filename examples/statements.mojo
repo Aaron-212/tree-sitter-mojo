@@ -9,6 +9,6 @@ def main():
     comptime Vec3 = List[Float64]
     var position: Vec3 = [0.0, 0.0, 0.0]
 
-    # x = y = z = 0        # Assign the same value to multiple names
+    x = y = z = 0        # Assign the same value to multiple names
     a, b = 1, 2          # Destructuring assignment
     (a, b) = (1, 2)      # Equivalent destructuring, not "assign tuple to tuple"
