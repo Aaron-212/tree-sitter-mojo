@@ -2,7 +2,6 @@
 If Statement
 ============
 
-
 def main():
     if x > 0:
         print("positive")
@@ -25,8 +24,9 @@ def main():
           (identifier)
           (integer))
         consequence: (block
-          (print_statement
-            argument: (parenthesized_expression
+          (call
+            function: (identifier)
+            arguments: (argument_list
               (string
                 (string_start)
                 (string_content)
@@ -36,8 +36,9 @@ def main():
             (identifier)
             (integer))
           consequence: (block
-            (print_statement
-              argument: (parenthesized_expression
+            (call
+              function: (identifier)
+              arguments: (argument_list
                 (string
                   (string_start)
                   (string_content)
@@ -47,16 +48,18 @@ def main():
             (identifier)
             (integer))
           consequence: (block
-            (print_statement
-              argument: (parenthesized_expression
+            (call
+              function: (identifier)
+              arguments: (argument_list
                 (string
                   (string_start)
                   (string_content)
                   (string_end))))))
         alternative: (else_clause
           body: (block
-            (print_statement
-              argument: (parenthesized_expression
+            (call
+              function: (identifier)
+              arguments: (argument_list
                 (string
                   (string_start)
                   (string_content)

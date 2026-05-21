@@ -82,10 +82,6 @@
         },
         {
           "type": "SYMBOL",
-          "name": "print_statement"
-        },
-        {
-          "type": "SYMBOL",
           "name": "assert_statement"
         },
         {
@@ -331,122 +327,6 @@
     "wildcard_import": {
       "type": "STRING",
       "value": "*"
-    },
-    "print_statement": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "STRING",
-                "value": "print"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "chevron"
-              },
-              {
-                "type": "REPEAT",
-                "content": {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": ","
-                    },
-                    {
-                      "type": "FIELD",
-                      "name": "argument",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "expression"
-                      }
-                    }
-                  ]
-                }
-              },
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": ","
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              }
-            ]
-          }
-        },
-        {
-          "type": "PREC",
-          "value": -3,
-          "content": {
-            "type": "PREC_DYNAMIC",
-            "value": -1,
-            "content": {
-              "type": "SEQ",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "print"
-                },
-                {
-                  "type": "SEQ",
-                  "members": [
-                    {
-                      "type": "FIELD",
-                      "name": "argument",
-                      "content": {
-                        "type": "SYMBOL",
-                        "name": "expression"
-                      }
-                    },
-                    {
-                      "type": "REPEAT",
-                      "content": {
-                        "type": "SEQ",
-                        "members": [
-                          {
-                            "type": "STRING",
-                            "value": ","
-                          },
-                          {
-                            "type": "FIELD",
-                            "name": "argument",
-                            "content": {
-                              "type": "SYMBOL",
-                              "name": "expression"
-                            }
-                          }
-                        ]
-                      }
-                    }
-                  ]
-                },
-                {
-                  "type": "CHOICE",
-                  "members": [
-                    {
-                      "type": "STRING",
-                      "value": ","
-                    },
-                    {
-                      "type": "BLANK"
-                    }
-                  ]
-                }
-              ]
-            }
-          }
-        }
-      ]
     },
     "chevron": {
       "type": "SEQ",
@@ -6377,17 +6257,8 @@
           "content": {
             "type": "ALIAS",
             "content": {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "print"
-                },
-                {
-                  "type": "STRING",
-                  "value": "exec"
-                }
-              ]
+              "type": "STRING",
+              "value": "exec"
             },
             "named": true,
             "value": "identifier"
@@ -6530,10 +6401,6 @@
     [
       "named_expression",
       "as_pattern"
-    ],
-    [
-      "print_statement",
-      "primary_expression"
     ],
     [
       "type_alias_statement",

@@ -2,7 +2,6 @@
 While Statement
 ===============
 
-
 def main():
     while True:
         var item = get_next()

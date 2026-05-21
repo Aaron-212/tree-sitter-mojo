@@ -49,7 +49,6 @@ export default grammar({
     [$.list, $.list_pattern],
     [$.with_item, $._collection_elements],
     [$.named_expression, $.as_pattern],
-    [$.print_statement, $.primary_expression],
     [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
   ],
@@ -155,7 +154,6 @@ export default grammar({
       choice(
         $.import_statement,
         $.import_from_statement,
-        $.print_statement,
         $.assert_statement,
         $.expression_statement,
         $.return_statement,
@@ -194,30 +192,6 @@ export default grammar({
       seq(field("name", $.dotted_name), "as", field("alias", $.identifier)),
 
     wildcard_import: (_) => "*",
-
-    print_statement: ($) =>
-      choice(
-        prec(
-          1,
-          seq(
-            "print",
-            $.chevron,
-            repeat(seq(",", field("argument", $.expression))),
-            optional(",")
-          )
-        ),
-        prec(
-          -3,
-          prec.dynamic(
-            -1,
-            seq(
-              "print",
-              commaSep1(field("argument", $.expression)),
-              optional(",")
-            )
-          )
-        )
-      ),
 
     chevron: ($) => seq(">>", $.expression),
 
@@ -1193,7 +1167,7 @@ export default grammar({
 
     keyword_identifier: ($) =>
       choice(
-        prec(-3, alias(choice("print", "exec"), $.identifier)),
+        prec(-3, alias("exec", $.identifier)),
         alias(choice("type", "match"), $.identifier)
       ),
 

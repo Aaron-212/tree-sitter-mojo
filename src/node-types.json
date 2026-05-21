@@ -94,10 +94,6 @@
         "named": true
       },
       {
-        "type": "print_statement",
-        "named": true
-      },
-      {
         "type": "raise_statement",
         "named": true
       },
@@ -988,21 +984,6 @@
         },
         {
           "type": "union_pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "chevron",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "expression",
           "named": true
         }
       ]
@@ -2556,32 +2537,6 @@
     "fields": {}
   },
   {
-    "type": "print_statement",
-    "named": true,
-    "fields": {
-      "argument": {
-        "multiple": true,
-        "required": false,
-        "types": [
-          {
-            "type": "expression",
-            "named": true
-          }
-        ]
-      }
-    },
-    "children": {
-      "multiple": false,
-      "required": false,
-      "types": [
-        {
-          "type": "chevron",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "raise_statement",
     "named": true,
     "fields": {
@@ -3773,10 +3728,6 @@
   },
   {
     "type": "pass",
-    "named": false
-  },
-  {
-    "type": "print",
     "named": false
   },
   {
