@@ -29,7 +29,7 @@ const PREC = {
   unary: 20,
   power: 21,
   call: 22,
-  call1: 23,
+  type_constraint: 23,
 };
 
 const SEMICOLON = ";";
@@ -53,6 +53,7 @@ module.exports = grammar({
     [$.print_statement, $.primary_expression],
     [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
+    [$.type_parameter, $.type_constraint],
   ],
 
   supertypes: ($) => [
@@ -945,10 +946,19 @@ module.exports = grammar({
       prec(
         PREC.call,
         seq(
-          field("function", $.primary_expression),
-          field("type_constraint", optional($.type_parameter)),
+          field("function", choice($.identifier, $.attribute)),
+          field("type_constraint", optional($.type_constraint)),
           field("arguments", choice($.generator_expression, $.argument_list))
         )
+      ),
+
+    // type_parameter: ($) => seq("[", commaSep1($.type), optional(","), "]"),
+    type_constraint: ($) =>
+      seq(
+        "[",
+        commaSep1(choice($.type, seq($.type, "=", $.expression))),
+        optional(","),
+        "]"
       ),
 
     typed_parameter: ($) =>
@@ -982,7 +992,7 @@ module.exports = grammar({
         1,
         seq(choice($.identifier, alias("type", $.identifier)), $.type_parameter)
       ),
-    union_type: ($) => prec.left(seq($.type, "|", $.type)),
+    union_type: ($) => prec.left(seq($.type, "&", $.type)),
     constrained_type: ($) =>
       prec.right(seq(optional("var"), $.type, ":", $.type)),
     member_type: ($) => seq($.type, ".", $.identifier),

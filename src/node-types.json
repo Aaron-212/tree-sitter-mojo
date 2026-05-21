@@ -853,7 +853,11 @@
         "required": true,
         "types": [
           {
-            "type": "primary_expression",
+            "type": "attribute",
+            "named": true
+          },
+          {
+            "type": "identifier",
             "named": true
           }
         ]
@@ -863,7 +867,7 @@
         "required": false,
         "types": [
           {
-            "type": "type_parameter",
+            "type": "type_constraint",
             "named": true
           }
         ]
@@ -3105,6 +3109,25 @@
           }
         ]
       }
+    }
+  },
+  {
+    "type": "type_constraint",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "expression",
+          "named": true
+        },
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
     }
   },
   {
