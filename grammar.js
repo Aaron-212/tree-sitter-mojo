@@ -105,7 +105,7 @@ export default grammar({
 
   reserved: {
     global: (_) => [
-      // https://docs.python.org/3/reference/lexical_analysis.html#keywords
+      // --- Global Reserved Words ---
       "False",
       "else",
       "import",
@@ -140,6 +140,22 @@ export default grammar({
       "comptime",
       "self",
       "Self",
+      "var",
+      "trait",
+
+      // --- Rule-Specific & Contextual Keywords ---
+      "match",
+      "case",
+      "exec",
+      "type",
+      "lambda",
+      "mut",
+      "out",
+      "deinit",
+      "ref",
+      "register_passable",
+      "thin",
+      "abi",
     ],
   },
 
