@@ -1,0 +1,27 @@
+=======
+Comment
+=======
+
+# Hello
+
+var x = 10 # Assign 10 to x
+
+#no space
+#      too many space
+
+x = 1# no space again
+
+---
+
+(module
+  (comment)
+  (assignment
+    left: (identifier)
+    right: (integer))
+  (comment)
+  (comment)
+  (comment)
+  (assignment
+    left: (identifier)
+    right: (integer))
+  (comment))
