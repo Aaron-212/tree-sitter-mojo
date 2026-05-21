@@ -52,7 +52,6 @@ export default grammar({
     [$.print_statement, $.primary_expression],
     [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
-    [$.type_parameter, $.type_constraint],
   ],
 
   supertypes: ($) => [
@@ -435,7 +434,13 @@ export default grammar({
         ":",
         field("body", $._suite)
       ),
-    type_parameter: ($) => seq("[", commaSep1($.type), optional(","), "]"),
+    type_parameter: ($) =>
+      seq(
+        "[",
+        commaSep1(choice($.type, seq($.type, "=", $.type))),
+        optional(","),
+        "]"
+      ),
 
     trait_definition: ($) =>
       seq(
@@ -843,9 +848,25 @@ export default grammar({
         field("body", $._expression_within_for_in_clause)
       ),
 
-    assignment: ($) =>
+    assignment: ($) => choice($._comptime_assignment, $._regular_assignment),
+    _comptime_assignment: ($) =>
       seq(
-        field("kind", optional(choice("var", "comptime"))),
+        field("kind", "comptime"),
+        field("left", $._left_hand_side),
+        choice(
+          seq("=", field("right", $._comptime_right_hand_side)),
+          seq(":", field("type", $.type)),
+          seq(
+            ":",
+            field("type", $.type),
+            "=",
+            field("right", $._comptime_right_hand_side)
+          )
+        )
+      ),
+    _regular_assignment: ($) =>
+      seq(
+        field("kind", optional("var")),
         field("left", $._left_hand_side),
         choice(
           seq("=", field("right", $._right_hand_side)),
@@ -900,6 +921,8 @@ export default grammar({
         $.pattern_list,
         $.yield
       ),
+    _comptime_right_hand_side: ($) =>
+      choice(prec(1, $.type), $._right_hand_side),
 
     yield: ($) =>
       prec.right(
@@ -946,18 +969,9 @@ export default grammar({
         PREC.call,
         seq(
           field("function", choice($.identifier, $.attribute)),
-          field("type_constraint", optional($.type_constraint)),
+          field("type_constraint", optional($.type_parameter)),
           field("arguments", choice($.generator_expression, $.argument_list))
         )
-      ),
-
-    // type_parameter: ($) => seq("[", commaSep1($.type), optional(","), "]"),
-    type_constraint: ($) =>
-      seq(
-        "[",
-        commaSep1(choice($.type, seq($.type, "=", $.expression))),
-        optional(","),
-        "]"
       ),
 
     typed_parameter: ($) =>
@@ -1175,7 +1189,7 @@ export default grammar({
       );
     },
 
-    identifier: (_) => /[_\p{XID_Start}][_\p{XID_Continue}]*/,
+    identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     keyword_identifier: ($) =>
       choice(

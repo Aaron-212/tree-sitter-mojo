@@ -1,5 +1,10 @@
 {
-  "inlay_hints": {
-    "enabled": false,
+  "languages": {
+    "JavaScript": {
+      "inlay_hints": {
+        "enabled": false,
+      },
+      "language_servers": null,
+    },
   },
 }
