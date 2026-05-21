@@ -210,6 +210,9 @@ Special Identifier Name Funciton
 def `import`():
     print("In `import`")
 
+def main():
+    `import`()
+
 ---
 
 (module
@@ -226,4 +229,14 @@ def `import`():
           (string
             (string_start)
             (string_content)
-            (string_end)))))))
+            (string_end))))))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (call
+        function: (identifier
+          (special_identifier_start)
+          (special_identifier_content)
+          (special_identifier_end))
+        arguments: (argument_list)))))
