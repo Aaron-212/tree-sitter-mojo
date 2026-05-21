@@ -34,7 +34,7 @@ const PREC = {
 
 const SEMICOLON = ";";
 
-module.exports = grammar({
+export default grammar({
   name: "mojo",
 
   extras: ($) => [
