@@ -187,8 +187,6 @@ export default grammar({
         $.pass_statement,
         $.break_statement,
         $.continue_statement,
-        $.global_statement,
-        $.nonlocal_statement,
         $.exec_statement,
         $.type_alias_statement
       ),
@@ -412,9 +410,9 @@ export default grammar({
 
     dictionary_splat: ($) => seq("**", $.expression),
 
-    global_statement: ($) => seq("global", commaSep1($.identifier)),
+    // global_statement: ($) => seq("global", commaSep1($.identifier)),
 
-    nonlocal_statement: ($) => seq("nonlocal", commaSep1($.identifier)),
+    // nonlocal_statement: ($) => seq("nonlocal", commaSep1($.identifier)),
 
     exec_statement: ($) =>
       seq(
