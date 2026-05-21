@@ -33,7 +33,7 @@ a, b = 1, 2
     type: (type
       (generic_type
         (identifier)
-        (type_parameter
+        (type_parameter_list
           (type
             (identifier))))))
   (assignment
@@ -54,7 +54,7 @@ a, b = 1, 2
     type: (type
       (generic_type
         (identifier)
-        (type_parameter
+        (type_parameter_list
           (type
             (identifier)))))
     right: (list))
@@ -63,7 +63,7 @@ a, b = 1, 2
     right: (type
       (generic_type
         (identifier)
-        (type_parameter
+        (type_parameter_list
           (type
             (identifier))))))
   (assignment

@@ -1,0 +1,206 @@
+=====
+Raise
+=====
+
+def validate(value: Int) raises -> Bool:
+    if value < 0:
+        raise Error("value must be non-negative")
+    return True
+
+def fetch() raises NetworkError -> String:
+    raise NetworkError("HTCPCP", 418)
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (typed_value_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    raises_clause: (raises_clause)
+    return_type: (type
+      (identifier))
+    body: (block
+      (if_statement
+        condition: (comparison_operator
+          (identifier)
+          (integer))
+        consequence: (block
+          (raise_statement
+            (call
+              function: (identifier)
+              arguments: (argument_list
+                (string
+                  (string_start)
+                  (string_content)
+                  (string_end)))))))
+      (return_statement
+        (true))))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    raises_clause: (raises_clause
+      error_type: (type
+        (identifier)))
+    return_type: (type
+      (identifier))
+    body: (block
+      (raise_statement
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))
+            (integer)))))))
+
+====
+Thin
+====
+
+def map[
+    T: Copyable, U: Copyable
+](f: def(T) thin -> U, input: List[T]) -> List[U]:
+    pass
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter_list
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier))))
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier)))))
+    parameters: (parameters
+      (typed_value_parameter
+        (identifier)
+        type: (type
+          (function_pointer_type
+            parameters: (function_pointer_parameters
+              (type
+                (identifier)))
+            return_type: (type
+              (identifier)))))
+      (typed_value_parameter
+        (identifier)
+        type: (type
+          (generic_type
+            (identifier)
+            (type_parameter_list
+              (type
+                (identifier)))))))
+    return_type: (type
+      (generic_type
+        (identifier)
+        (type_parameter_list
+          (type
+            (identifier)))))
+    body: (block
+      (pass_statement))))
+
+===
+ABI
+===
+
+var sqrt = lib.get_function[def(Float64) thin abi("C") -> Float64]("sqrt")
+
+---
+
+(module
+  (assignment
+    left: (identifier)
+    right: (call
+      function: (attribute
+        object: (identifier)
+        attribute: (identifier))
+      type_constraint: (type_parameter_list
+        (type
+          (function_pointer_type
+            parameters: (function_pointer_parameters
+              (type
+                (identifier)))
+            (string
+              (string_start)
+              (string_content)
+              (string_end))
+            return_type: (type
+              (identifier)))))
+      arguments: (argument_list
+        (string
+          (string_start)
+          (string_content)
+          (string_end))))))
+
+=================
+Register Passable
+=================
+
+def apply[F: def(Int) register_passable -> Int](f: F, x: Int) -> Int:
+    return f(x)
+
+def double(x: Int) register_passable -> Int:
+    return x * 2
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter_list
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (function_pointer_type
+              parameters: (function_pointer_parameters
+                (type
+                  (identifier)))
+              return_type: (type
+                (identifier)))))))
+    parameters: (parameters
+      (typed_value_parameter
+        (identifier)
+        type: (type
+          (identifier)))
+      (typed_value_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    return_type: (type
+      (identifier))
+    body: (block
+      (return_statement
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (identifier))))))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters
+      (typed_value_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    effects: (effects)
+    return_type: (type
+      (identifier))
+    body: (block
+      (return_statement
+        (binary_operator
+          left: (identifier)
+          right: (integer))))))

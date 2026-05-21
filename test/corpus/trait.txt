@@ -33,8 +33,7 @@ trait Boxable:
       (function_definition
         name: (identifier)
         parameters: (parameters
-          (self_parameter
-            (self_literal)))
+          (self_parameter))
         return_type: (type
           (member_type
             (type

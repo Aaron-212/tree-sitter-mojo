@@ -9,9 +9,10 @@
 
 export const PREC = {
   // this resolves a conflict between the usage of ':' in a lambda vs in a
-  // typed parameter. In the case of a lambda, we don't allow typed parameters.
+  // typed value parameter. In the case of a lambda, we don't allow typed value
+  // parameters.
   lambda: -2,
-  typed_parameter: -1,
+  typed_value_parameter: -1,
   conditional: -1,
 
   parenthesized_expression: 1,
@@ -51,6 +52,9 @@ export default grammar({
     [$.named_expression, $.as_pattern],
     [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
+    [$.argument_list, $.tuple],
+    [$.argument_list, $.tuple_pattern],
+    [$.argument_list, $._collection_elements],
   ],
 
   supertypes: ($) => [
@@ -371,13 +375,18 @@ export default grammar({
       seq(
         "def",
         field("name", $.identifier),
-        field("type_parameters", optional($.type_parameter)),
+        field("type_parameters", optional($.type_parameter_list)),
         field("parameters", $.parameters),
-        field("raise", optional(seq("raises", $.expression))),
+        // TODO: Which one comes first in place, raises or effects
+        field("raises_clause", optional($.raises_clause)),
+        field("effects", optional($.effects)),
         optional(seq("->", field("return_type", $.type))),
         ":",
         field("body", $._suite)
       ),
+    raises_clause: ($) =>
+      prec.left(seq("raises", optional(field("error_type", $.type)))),
+    effects: ($) => choice("register_passable"),
 
     parameters: ($) => seq("(", optional($._parameters), ")"),
 
@@ -408,12 +417,12 @@ export default grammar({
       seq(
         "struct",
         field("name", $.identifier),
-        field("type_parameters", optional($.type_parameter)),
+        field("type_parameters", optional($.type_parameter_list)),
         field("traits", optional($.argument_list)),
         ":",
         field("body", $._suite)
       ),
-    type_parameter: ($) =>
+    type_parameter_list: ($) =>
       seq(
         "[",
         commaSep1(
@@ -588,7 +597,7 @@ export default grammar({
     parameter: ($) =>
       choice(
         $.identifier,
-        $.typed_parameter,
+        $.typed_value_parameter,
         $.self_parameter,
         $.default_parameter,
         $.typed_default_parameter,
@@ -615,7 +624,7 @@ export default grammar({
     list_pattern: ($) => seq("[", optional($._patterns), "]"),
 
     self_parameter: ($) =>
-      seq(optional(choice("mut", "out", "deinit")), $.self_literal),
+      seq(optional(choice("mut", "out", "deinit")), "self"),
 
     default_parameter: ($) =>
       seq(
@@ -626,7 +635,7 @@ export default grammar({
 
     typed_default_parameter: ($) =>
       prec(
-        PREC.typed_parameter,
+        PREC.typed_value_parameter,
         seq(
           field("name", $.identifier),
           ":",
@@ -693,6 +702,7 @@ export default grammar({
         $.attribute,
         $.subscript,
         $.call,
+        $.comptime_call,
         $.list,
         $.list_comprehension,
         $.dictionary,
@@ -832,7 +842,7 @@ export default grammar({
     assignment: ($) => choice($._comptime_assignment, $._regular_assignment),
     _comptime_assignment: ($) =>
       seq(
-        field("kind", "comptime"),
+        "comptime",
         field("left", $._left_hand_side),
         choice(
           seq("=", field("right", $._comptime_right_hand_side)),
@@ -847,7 +857,7 @@ export default grammar({
       ),
     _regular_assignment: ($) =>
       seq(
-        field("kind", optional("var")),
+        optional("var"),
         field("left", $._left_hand_side),
         choice(
           seq("=", field("right", $._right_hand_side)),
@@ -917,7 +927,7 @@ export default grammar({
       prec(
         PREC.call,
         seq(
-          field("object", choice($.primary_expression, $.self_literal)),
+          field("object", choice($.primary_expression, "self")),
           ".",
           field("attribute", $.identifier)
         )
@@ -950,14 +960,22 @@ export default grammar({
         PREC.call,
         seq(
           field("function", choice($.identifier, $.attribute, $.self_type)),
-          field("type_constraint", optional($.type_parameter)),
+          field("type_constraint", optional($.type_parameter_list)),
+          field("arguments", choice($.generator_expression, $.argument_list))
+        )
+      ),
+    comptime_call: ($) =>
+      prec(
+        PREC.call,
+        seq(
+          "comptime",
           field("arguments", choice($.generator_expression, $.argument_list))
         )
       ),
 
-    typed_parameter: ($) =>
+    typed_value_parameter: ($) =>
       prec(
-        PREC.typed_parameter,
+        PREC.typed_value_parameter,
         seq(
           optional(choice("mut", "var", "out", "deinit", "ref")),
           choice(
@@ -978,19 +996,43 @@ export default grammar({
         $.union_type,
         $.constrained_type,
         $.member_type,
-        $.self_type
+        $.self_type,
+        $.function_pointer_type
       ),
     splat_type: ($) => prec(1, seq(choice("*", "**"), $.identifier)),
     generic_type: ($) =>
       prec(
         1,
-        seq(choice($.identifier, alias("type", $.identifier)), $.type_parameter)
+        seq(
+          choice($.identifier, alias("type", $.identifier)),
+          $.type_parameter_list
+        )
       ),
     union_type: ($) => prec.left(seq($.type, "&", $.type)),
     constrained_type: ($) =>
       prec.right(seq(optional("var"), $.type, ":", $.type)),
     member_type: ($) => seq($.type, ".", $.identifier),
     self_type: (_) => "Self",
+    function_pointer_type: ($) =>
+      prec.left(
+        seq(
+          "def",
+          field("parameters", $.function_pointer_parameters),
+          repeat($._function_pointer_effect),
+          "->",
+          field("return_type", $.type)
+        )
+      ),
+    function_pointer_parameters: ($) =>
+      seq("(", optional(seq(commaSep1($.type), optional(","))), ")"),
+    _function_pointer_effect: ($) =>
+      choice(
+        "thin",
+        "register_passable",
+        $.raises_clause,
+        $._function_pointer_abi
+      ),
+    _function_pointer_abi: ($) => seq("abi", "(", $.string, ")"),
 
     keyword_argument: ($) =>
       seq(

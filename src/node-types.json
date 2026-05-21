@@ -212,7 +212,7 @@
         "named": true
       },
       {
-        "type": "typed_parameter",
+        "type": "typed_value_parameter",
         "named": true
       }
     ]
@@ -261,6 +261,10 @@
       },
       {
         "type": "call",
+        "named": true
+      },
+      {
+        "type": "comptime_call",
         "named": true
       },
       {
@@ -463,20 +467,6 @@
     "type": "assignment",
     "named": true,
     "fields": {
-      "kind": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "comptime",
-            "named": false
-          },
-          {
-            "type": "var",
-            "named": false
-          }
-        ]
-      },
       "left": {
         "multiple": false,
         "required": true,
@@ -560,8 +550,8 @@
             "named": true
           },
           {
-            "type": "self_literal",
-            "named": true
+            "type": "self",
+            "named": false
           }
         ]
       }
@@ -875,7 +865,7 @@
         "required": false,
         "types": [
           {
-            "type": "type_parameter",
+            "type": "type_parameter_list",
             "named": true
           }
         ]
@@ -1080,6 +1070,26 @@
           "named": true
         }
       ]
+    }
+  },
+  {
+    "type": "comptime_call",
+    "named": true,
+    "fields": {
+      "arguments": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "argument_list",
+            "named": true
+          },
+          {
+            "type": "generator_expression",
+            "named": true
+          }
+        ]
+      }
     }
   },
   {
@@ -1433,6 +1443,11 @@
     }
   },
   {
+    "type": "effects",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "elif_clause",
     "named": true,
     "fields": {
@@ -1735,6 +1750,16 @@
           }
         ]
       },
+      "effects": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "effects",
+            "named": true
+          }
+        ]
+      },
       "name": {
         "multiple": false,
         "required": true,
@@ -1755,17 +1780,13 @@
           }
         ]
       },
-      "raise": {
-        "multiple": true,
+      "raises_clause": {
+        "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "expression",
+            "type": "raises_clause",
             "named": true
-          },
-          {
-            "type": "raises",
-            "named": false
           }
         ]
       },
@@ -1784,11 +1805,66 @@
         "required": false,
         "types": [
           {
-            "type": "type_parameter",
+            "type": "type_parameter_list",
             "named": true
           }
         ]
       }
+    }
+  },
+  {
+    "type": "function_pointer_parameters",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "type",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "function_pointer_type",
+    "named": true,
+    "fields": {
+      "parameters": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "function_pointer_parameters",
+            "named": true
+          }
+        ]
+      },
+      "return_type": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    },
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "raises_clause",
+          "named": true
+        },
+        {
+          "type": "string",
+          "named": true
+        }
+      ]
     }
   },
   {
@@ -1834,7 +1910,7 @@
           "named": true
         },
         {
-          "type": "type_parameter",
+          "type": "type_parameter_list",
           "named": true
         }
       ]
@@ -2603,6 +2679,22 @@
     }
   },
   {
+    "type": "raises_clause",
+    "named": true,
+    "fields": {
+      "error_type": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "relative_import",
     "named": true,
     "fields": {},
@@ -2643,17 +2735,7 @@
   {
     "type": "self_parameter",
     "named": true,
-    "fields": {},
-    "children": {
-      "multiple": false,
-      "required": true,
-      "types": [
-        {
-          "type": "self_literal",
-          "named": true
-        }
-      ]
-    }
+    "fields": {}
   },
   {
     "type": "set",
@@ -2842,7 +2924,7 @@
         "required": false,
         "types": [
           {
-            "type": "type_parameter",
+            "type": "type_parameter_list",
             "named": true
           }
         ]
@@ -3072,6 +3154,10 @@
           "named": true
         },
         {
+          "type": "function_pointer_type",
+          "named": true
+        },
+        {
           "type": "generic_type",
           "named": true
         },
@@ -3121,7 +3207,7 @@
     }
   },
   {
-    "type": "type_parameter",
+    "type": "type_parameter_list",
     "named": true,
     "fields": {},
     "children": {
@@ -3176,7 +3262,7 @@
     }
   },
   {
-    "type": "typed_parameter",
+    "type": "typed_value_parameter",
     "named": true,
     "fields": {
       "type": {
@@ -3623,6 +3709,10 @@
     "named": false
   },
   {
+    "type": "abi",
+    "named": false
+  },
+  {
     "type": "and",
     "named": false
   },
@@ -3805,12 +3895,16 @@
     "named": false
   },
   {
+    "type": "register_passable",
+    "named": false
+  },
+  {
     "type": "return",
     "named": false
   },
   {
-    "type": "self_literal",
-    "named": true
+    "type": "self",
+    "named": false
   },
   {
     "type": "self_type",
@@ -3826,6 +3920,10 @@
   },
   {
     "type": "struct",
+    "named": false
+  },
+  {
+    "type": "thin",
     "named": false
   },
   {

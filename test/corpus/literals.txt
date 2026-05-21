@@ -304,8 +304,7 @@ struct Point:
       (function_definition
         name: (identifier)
         parameters: (parameters
-          (self_parameter
-            (self_literal)))
+          (self_parameter))
         return_type: (type
           (identifier))
         body: (block
@@ -316,12 +315,10 @@ struct Point:
                   (binary_operator
                     left: (binary_operator
                       left: (attribute
-                        object: (self_literal)
                         attribute: (identifier))
                       right: (integer))
                     right: (binary_operator
                       left: (attribute
-                        object: (self_literal)
                         attribute: (identifier))
                       right: (integer))))
                 attribute: (identifier))
@@ -360,8 +357,7 @@ trait Drawable:
       (function_definition
         name: (identifier)
         parameters: (parameters
-          (self_parameter
-            (self_literal)))
+          (self_parameter))
         return_type: (type
           (none))
         body: (block

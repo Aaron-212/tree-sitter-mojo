@@ -28,7 +28,7 @@ def do_nothing():
   (function_definition
     name: (identifier)
     parameters: (parameters
-      (typed_parameter
+      (typed_value_parameter
         (identifier)
         type: (type
           (identifier))))
@@ -61,15 +61,12 @@ def clamp[T: Comparable & ImplicitlyCopyable](
         return hi
     return val
 
-def fetch() raises NetworkError -> String:
-    raise NetworkError("HTCPCP", 418)
-
 ---
 
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (type_parameter
+    type_parameters: (type_parameter_list
       (type
         (constrained_type
           (type
@@ -79,15 +76,15 @@ def fetch() raises NetworkError -> String:
               left: (identifier)
               right: (identifier))))))
     parameters: (parameters
-      (typed_parameter
+      (typed_value_parameter
         (identifier)
         type: (type
           (identifier)))
-      (typed_parameter
+      (typed_value_parameter
         (identifier)
         type: (type
           (identifier)))
-      (typed_parameter
+      (typed_value_parameter
         (identifier)
         type: (type
           (identifier))))
@@ -109,23 +106,7 @@ def fetch() raises NetworkError -> String:
           (return_statement
             (identifier))))
       (return_statement
-        (identifier))))
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
-    raise: (identifier)
-    return_type: (type
-      (identifier))
-    body: (block
-      (raise_statement
-        (call
-          function: (identifier)
-          arguments: (argument_list
-            (string
-              (string_start)
-              (string_content)
-              (string_end))
-            (integer)))))))
+        (identifier)))))
 
 
 ===================
@@ -145,7 +126,7 @@ def main():
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (type_parameter
+    type_parameters: (type_parameter_list
       (type
         (constrained_type
           (type
@@ -154,7 +135,7 @@ def main():
             (identifier))))
       (infer_only_marker))
     parameters: (parameters
-      (typed_parameter
+      (typed_value_parameter
         (identifier)
         type: (type
           (identifier))))
@@ -171,7 +152,7 @@ def main():
             (interpolation
               expression: (call
                 function: (identifier)
-                type_constraint: (type_parameter
+                type_constraint: (type_parameter_list
                   (type
                     (identifier)))
                 arguments: (argument_list)))
@@ -194,7 +175,7 @@ def main():
             (string_end))))
       (call
         function: (identifier)
-        type_constraint: (type_parameter
+        type_constraint: (type_parameter_list
           (type
             (identifier))
           (type

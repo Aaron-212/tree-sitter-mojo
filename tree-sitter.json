@@ -6,7 +6,10 @@
       "camelcase": "Mojo",
       "title": "Mojo",
       "scope": "source.mojo",
-      "file-types": ["mojo,", "🔥"],
+      "file-types": [
+        "mojo,",
+        "🔥"
+      ],
       "injection-regex": "^mojo$",
       "class-name": "TreeSitterMojo"
     }
