@@ -14,9 +14,9 @@ enum TokenType {
     STRING_CONTENT,
     ESCAPE_INTERPOLATION,
     STRING_END,
-    SPECIAL_IDENTIFIER_START,
-    SPECIAL_IDENTIFIER_CONTENT,
-    SPECIAL_IDENTIFIER_END,
+    ESCAPED_IDENTIFIER_START,
+    ESCAPED_IDENTIFIER_CONTENT,
+    ESCAPED_IDENTIFIER_END,
     COMMENT,
     CLOSE_PAREN,
     CLOSE_BRACKET,
@@ -103,6 +103,7 @@ typedef struct {
     Array(uint16_t) indents;
     Array(Delimiter) delimiters;
     bool inside_interpolated_string;
+    bool inside_escaped_identifier;
 } Scanner;
 
 static inline void advance(TSLexer *lexer) { lexer->advance(lexer, false); }
@@ -237,7 +238,8 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
         }
     }
 
-    if (valid_symbols[SPECIAL_IDENTIFIER_CONTENT]) {
+    if (valid_symbols[ESCAPED_IDENTIFIER_CONTENT] &&
+        scanner->inside_escaped_identifier) {
         bool has_content = false;
         while (lexer->lookahead && lexer->lookahead != '`' &&
                lexer->lookahead != '\n') {
@@ -246,15 +248,17 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
         }
         if (has_content) {
             lexer->mark_end(lexer);
-            lexer->result_symbol = SPECIAL_IDENTIFIER_CONTENT;
+            lexer->result_symbol = ESCAPED_IDENTIFIER_CONTENT;
             return true;
         }
     }
 
-    if (valid_symbols[SPECIAL_IDENTIFIER_END] && lexer->lookahead == '`') {
+    if (valid_symbols[ESCAPED_IDENTIFIER_END] &&
+        scanner->inside_escaped_identifier && lexer->lookahead == '`') {
         advance(lexer);
         lexer->mark_end(lexer);
-        lexer->result_symbol = SPECIAL_IDENTIFIER_END;
+        lexer->result_symbol = ESCAPED_IDENTIFIER_END;
+        scanner->inside_escaped_identifier = false;
         return true;
     }
 
@@ -326,8 +330,8 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
                 return true;
             }
 
-            bool next_tok_is_string_start = lexer->lookahead == '"' ||
-                                            lexer->lookahead == '\'';
+            bool next_tok_is_string_start =
+                lexer->lookahead == '"' || lexer->lookahead == '\'';
 
             if ((valid_symbols[DEDENT] ||
                  (!valid_symbols[NEWLINE] &&
@@ -353,10 +357,11 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
     }
 
     if (first_comment_indent_length == -1 &&
-        valid_symbols[SPECIAL_IDENTIFIER_START] && lexer->lookahead == '`') {
+        valid_symbols[ESCAPED_IDENTIFIER_START] && lexer->lookahead == '`') {
         advance(lexer);
         lexer->mark_end(lexer);
-        lexer->result_symbol = SPECIAL_IDENTIFIER_START;
+        lexer->result_symbol = ESCAPED_IDENTIFIER_START;
+        scanner->inside_escaped_identifier = true;
         return true;
     }
 
@@ -365,8 +370,7 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
 
         bool has_flags = false;
         while (lexer->lookahead) {
-            if (lexer->lookahead == 'f' || lexer->lookahead == 'F' ||
-                lexer->lookahead == 't' || lexer->lookahead == 'T') {
+            if (lexer->lookahead == 't' || lexer->lookahead == 'T') {
                 set_format(&delimiter);
             } else if (lexer->lookahead == 'r' || lexer->lookahead == 'R') {
                 set_raw(&delimiter);
@@ -420,7 +424,7 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
 }
 
 unsigned tree_sitter_mojo_external_scanner_serialize(void *payload,
-                                                      char *buffer) {
+                                                     char *buffer) {
     Scanner *scanner = (Scanner *)payload;
 
     size_t size = 0;

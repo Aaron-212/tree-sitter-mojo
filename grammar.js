@@ -71,9 +71,9 @@ export default grammar({
     $._string_content,
     $.escape_interpolation,
     $.string_end,
-    $.special_identifier_start,
-    $.special_identifier_content,
-    $.special_identifier_end,
+    $.escaped_identifier_start,
+    $.escaped_identifier_content,
+    $.escaped_identifier_end,
 
     // Mark comments as external tokens so that the external scanner is always
     // invoked, even if no external token is expected. This allows for better
@@ -134,6 +134,8 @@ export default grammar({
       "or",
       "yield",
       "comptime",
+      "self",
+      "Self",
     ],
   },
 
@@ -613,7 +615,7 @@ export default grammar({
     list_pattern: ($) => seq("[", optional($._patterns), "]"),
 
     self_parameter: ($) =>
-      seq(optional(choice("mut", "out", "deinit")), "self"),
+      seq(optional(choice("mut", "out", "deinit")), $.self_literal),
 
     default_parameter: ($) =>
       seq(
@@ -915,7 +917,7 @@ export default grammar({
       prec(
         PREC.call,
         seq(
-          field("object", $.primary_expression),
+          field("object", choice($.primary_expression, $.self_literal)),
           ".",
           field("attribute", $.identifier)
         )
@@ -947,7 +949,7 @@ export default grammar({
       prec(
         PREC.call,
         seq(
-          field("function", choice($.identifier, $.attribute)),
+          field("function", choice($.identifier, $.attribute, $.self_type)),
           field("type_constraint", optional($.type_parameter)),
           field("arguments", choice($.generator_expression, $.argument_list))
         )
@@ -975,7 +977,8 @@ export default grammar({
         $.generic_type,
         $.union_type,
         $.constrained_type,
-        $.member_type
+        $.member_type,
+        $.self_type
       ),
     splat_type: ($) => prec(1, seq(choice("*", "**"), $.identifier)),
     generic_type: ($) =>
@@ -987,6 +990,7 @@ export default grammar({
     constrained_type: ($) =>
       prec.right(seq(optional("var"), $.type, ":", $.type)),
     member_type: ($) => seq($.type, ".", $.identifier),
+    self_type: (_) => "Self",
 
     keyword_argument: ($) =>
       seq(
@@ -1088,6 +1092,8 @@ export default grammar({
         )
       ),
 
+    self_literal: (_) => "self",
+
     interpolation: ($) =>
       seq(
         "{",
@@ -1138,16 +1144,10 @@ export default grammar({
     integer: (_) =>
       token(
         choice(
-          seq(choice("0x", "0X"), repeat1(/_?[A-Fa-f0-9]+/), optional(/[Ll]/)),
-          seq(choice("0o", "0O"), repeat1(/_?[0-7]+/), optional(/[Ll]/)),
-          seq(choice("0b", "0B"), repeat1(/_?[0-1]+/), optional(/[Ll]/)),
-          seq(
-            repeat1(/[0-9]+_?/),
-            choice(
-              optional(/[Ll]/), // long numbers
-              optional(/[jJ]/) // complex numbers
-            )
-          )
+          seq(choice("0x", "0X"), repeat1(/_?[A-Fa-f0-9]+/)),
+          seq(choice("0o", "0O"), repeat1(/_?[0-7]+/)),
+          seq(choice("0b", "0B"), repeat1(/_?[0-1]+/)),
+          repeat1(/[0-9]+_*/)
         )
       ),
 
@@ -1171,9 +1171,9 @@ export default grammar({
       choice(
         $._identifier,
         seq(
-          $.special_identifier_start,
-          repeat1($.special_identifier_content),
-          $.special_identifier_end
+          $.escaped_identifier_start,
+          repeat1($.escaped_identifier_content),
+          $.escaped_identifier_end
         )
       ),
 

@@ -558,6 +558,10 @@
           {
             "type": "primary_expression",
             "named": true
+          },
+          {
+            "type": "self_literal",
+            "named": true
           }
         ]
       }
@@ -858,6 +862,10 @@
           },
           {
             "type": "identifier",
+            "named": true
+          },
+          {
+            "type": "self_type",
             "named": true
           }
         ]
@@ -1856,15 +1864,15 @@
       "required": false,
       "types": [
         {
-          "type": "special_identifier_content",
+          "type": "escaped_identifier_content",
           "named": true
         },
         {
-          "type": "special_identifier_end",
+          "type": "escaped_identifier_end",
           "named": true
         },
         {
-          "type": "special_identifier_start",
+          "type": "escaped_identifier_start",
           "named": true
         }
       ]
@@ -2635,7 +2643,17 @@
   {
     "type": "self_parameter",
     "named": true,
-    "fields": {}
+    "fields": {},
+    "children": {
+      "multiple": false,
+      "required": true,
+      "types": [
+        {
+          "type": "self_literal",
+          "named": true
+        }
+      ]
+    }
   },
   {
     "type": "set",
@@ -3059,6 +3077,10 @@
         },
         {
           "type": "member_type",
+          "named": true
+        },
+        {
+          "type": "self_type",
           "named": true
         },
         {
@@ -3666,6 +3688,18 @@
     "named": true
   },
   {
+    "type": "escaped_identifier_content",
+    "named": true
+  },
+  {
+    "type": "escaped_identifier_end",
+    "named": true
+  },
+  {
+    "type": "escaped_identifier_start",
+    "named": true
+  },
+  {
     "type": "except",
     "named": false
   },
@@ -3775,19 +3809,11 @@
     "named": false
   },
   {
-    "type": "self",
-    "named": false
-  },
-  {
-    "type": "special_identifier_content",
+    "type": "self_literal",
     "named": true
   },
   {
-    "type": "special_identifier_end",
-    "named": true
-  },
-  {
-    "type": "special_identifier_start",
+    "type": "self_type",
     "named": true
   },
   {

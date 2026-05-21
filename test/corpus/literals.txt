@@ -1,0 +1,368 @@
+=======
+Integer
+=======
+
+42
+0xFF
+0o52
+0b101010
+
+1_000_000
+1__000_
+
+---
+
+(module
+  (integer)
+  (integer)
+  (integer)
+  (integer)
+  (integer)
+  (integer))
+
+
+=====
+Float
+=====
+
+1.0
+3.14159
+.5
+2.
+2.5e-3
+1E10
+1_000.000_5
+
+---
+
+(module
+  (float)
+  (float)
+  (float)
+  (float)
+  (float)
+  (float)
+  (float))
+
+======
+String
+======
+
+"Hello"
+'world'
+
+"""Multi-line
+string"""
+
+'''Also
+multi-line'''
+
+---
+
+(module
+  (string
+    (string_start)
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (string_end)))
+
+
+================
+Multiline String
+================
+
+"Hello, " "World"
+
+x = "line one "
+    "line two"
+
+x = """\
+    This string has no leading newline.\
+    """
+
+---
+
+
+(module
+  (concatenated_string
+    (string
+      (string_start)
+      (string_content)
+      (string_end))
+    (string
+      (string_start)
+      (string_content)
+      (string_end)))
+  (assignment
+    left: (identifier)
+    right: (string
+      (string_start)
+      (string_content)
+      (string_end)))
+  (string
+    (string_start)
+    (string_content)
+    (string_end))
+  (assignment
+    left: (identifier)
+    right: (string
+      (string_start)
+      (string_content
+        (escape_sequence)
+        (escape_sequence))
+      (string_end))))
+
+===============
+Special Strings
+===============
+
+r"C:\path\to\file"
+t"Hello, {name}!"
+t"1 + 1 = {1 + 1}"
+
+t"""
+Hello, {name}!
+"""
+
+rt"Path: {base}\subdir"
+
+t"Use {{braces}} in t-strings"
+
+var greeting = t"Hello, {t"dear {name}"}!"
+
+---
+
+(module
+  (string
+    (string_start)
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (interpolation
+      expression: (identifier))
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (interpolation
+      expression: (binary_operator
+        left: (integer)
+        right: (integer)))
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (interpolation
+      expression: (identifier))
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content)
+    (interpolation
+      expression: (identifier))
+    (string_content)
+    (string_end))
+  (string
+    (string_start)
+    (string_content
+      (escape_interpolation)
+      (escape_interpolation))
+    (string_end))
+  (assignment
+    left: (identifier)
+    right: (string
+      (string_start)
+      (string_content)
+      (interpolation
+        expression: (string
+          (string_start)
+          (string_content)
+          (interpolation
+            expression: (identifier))
+          (string_end)))
+      (string_content)
+      (string_end))))
+
+=======
+Boolean
+=======
+
+x = True
+y = False
+
+---
+
+(module
+  (assignment
+    left: (identifier)
+    right: (true))
+  (assignment
+    left: (identifier)
+    right: (false)))
+
+
+====
+None
+====
+
+x: NoneType = None
+
+def greet():
+    print("hello")
+
+def greet() -> None:
+    print("hello")
+
+---
+
+(module
+  (assignment
+    left: (identifier)
+    type: (type
+      (identifier))
+    right: (none))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end))))))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    return_type: (type
+      (none))
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end)))))))
+
+====
+Self
+====
+
+struct Point:
+    var x: Float64
+    var y: Float64
+
+    def create() -> Self:
+        return Self(0.0, 0.0)
+
+    def distance(self) -> Float64:
+        return (self.x ** 2 + self.y ** 2).sqrt()
+
+---
+
+(module
+  (struct_definition
+    name: (identifier)
+    body: (block
+      (assignment
+        left: (identifier)
+        type: (type
+          (identifier)))
+      (assignment
+        left: (identifier)
+        type: (type
+          (identifier)))
+      (function_definition
+        name: (identifier)
+        parameters: (parameters)
+        return_type: (type
+          (self_type))
+        body: (block
+          (return_statement
+            (call
+              function: (self_type)
+              arguments: (argument_list
+                (float)
+                (float))))))
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (self_parameter
+            (self_literal)))
+        return_type: (type
+          (identifier))
+        body: (block
+          (return_statement
+            (call
+              function: (attribute
+                object: (parenthesized_expression
+                  (binary_operator
+                    left: (binary_operator
+                      left: (attribute
+                        object: (self_literal)
+                        attribute: (identifier))
+                      right: (integer))
+                    right: (binary_operator
+                      left: (attribute
+                        object: (self_literal)
+                        attribute: (identifier))
+                      right: (integer))))
+                attribute: (identifier))
+              arguments: (argument_list))))))))
+
+=======
+Discard
+=======
+
+_, y = get_pair()
+
+---
+
+(module
+  (assignment
+    left: (pattern_list
+      (identifier)
+      (identifier))
+    right: (call
+      function: (identifier)
+      arguments: (argument_list))))
+
+========
+Ellipsis
+========
+
+trait Drawable:
+    def draw(self) -> None: ...
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    body: (block
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (self_parameter
+            (self_literal)))
+        return_type: (type
+          (none))
+        body: (block
+          (ellipsis))))))

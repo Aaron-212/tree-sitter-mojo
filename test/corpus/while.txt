@@ -63,3 +63,37 @@ while True:
         function: (identifier)
         arguments: (argument_list
           (identifier))))))
+
+===============
+While Else Loop
+===============
+
+while shouldLoop:
+    print("Looping once")
+    break
+else:
+    print("Not looping")
+
+---
+
+(module
+  (while_statement
+    condition: (identifier)
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end))))
+      (break_statement))
+    alternative: (else_clause
+      body: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))))))))

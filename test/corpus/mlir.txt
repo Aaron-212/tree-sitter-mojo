@@ -24,9 +24,9 @@ def main():
         right: (attribute
           object: (identifier)
           attribute: (identifier
-            (special_identifier_start)
-            (special_identifier_content)
-            (special_identifier_end))))
+            (escaped_identifier_start)
+            (escaped_identifier_content)
+            (escaped_identifier_end))))
       (assignment
         left: (identifier)
         type: (type
@@ -36,18 +36,18 @@ def main():
         right: (attribute
           object: (identifier)
           attribute: (identifier
-            (special_identifier_start)
-            (special_identifier_content)
-            (special_identifier_end))))
+            (escaped_identifier_start)
+            (escaped_identifier_content)
+            (escaped_identifier_end))))
       (assignment
         left: (identifier)
         right: (call
           function: (attribute
             object: (identifier)
             attribute: (identifier
-              (special_identifier_start)
-              (special_identifier_content)
-              (special_identifier_end)))
+              (escaped_identifier_start)
+              (escaped_identifier_content)
+              (escaped_identifier_end)))
           arguments: (argument_list
             (identifier)
             (identifier))))

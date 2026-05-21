@@ -33,11 +33,13 @@ trait Boxable:
       (function_definition
         name: (identifier)
         parameters: (parameters
-          (self_parameter))
+          (self_parameter
+            (self_literal)))
         return_type: (type
-          (attribute
-            object: (identifier)
-            attribute: (identifier)))
+          (member_type
+            (type
+              (self_type))
+            (identifier)))
         body: (block
           (ellipsis)))
       (decorated_definition
@@ -71,7 +73,6 @@ trait AnyType:
     name: (identifier)
     body: (block
       (pass_statement))))
-
 
 ===========
 Child Trait

@@ -32,7 +32,8 @@ struct Point:
       (function_definition
         name: (identifier)
         parameters: (parameters
-          (self_parameter)
+          (self_parameter
+            (self_literal))
           (typed_parameter
             (identifier)
             type: (type
@@ -44,18 +45,19 @@ struct Point:
         body: (block
           (assignment
             left: (attribute
-              object: (identifier)
+              object: (self_literal)
               attribute: (identifier))
             right: (identifier))
           (assignment
             left: (attribute
-              object: (identifier)
+              object: (self_literal)
               attribute: (identifier))
             right: (identifier))))
       (function_definition
         name: (identifier)
         parameters: (parameters
-          (self_parameter))
+          (self_parameter
+            (self_literal)))
         return_type: (type
           (identifier))
         body: (block
@@ -69,17 +71,17 @@ struct Point:
                     (binary_operator
                       left: (binary_operator
                         left: (attribute
-                          object: (identifier)
+                          object: (self_literal)
                           attribute: (identifier))
                         right: (attribute
-                          object: (identifier)
+                          object: (self_literal)
                           attribute: (identifier)))
                       right: (binary_operator
                         left: (attribute
-                          object: (identifier)
+                          object: (self_literal)
                           attribute: (identifier))
                         right: (attribute
-                          object: (identifier)
+                          object: (self_literal)
                           attribute: (identifier))))))))))))))
 
 ================================
