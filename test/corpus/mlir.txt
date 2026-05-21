@@ -13,7 +13,7 @@ def main():
 (module
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (assignment
         left: (identifier)
@@ -48,15 +48,15 @@ def main():
               (escaped_identifier_start)
               (escaped_identifier_content)
               (escaped_identifier_end)))
-          arguments: (argument_list
+          arguments: (call_argument_list
             (identifier)
             (identifier))))
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (keyword_argument
                 name: (identifier)
                 value: (identifier)))))))))

@@ -32,8 +32,8 @@ trait Boxable:
             right: (identifier))))
       (function_definition
         name: (identifier)
-        parameters: (parameters
-          (self_parameter))
+        argument_list: (argument_list
+          (self_argument))
         return_type: (type
           (member_type
             (type
@@ -46,7 +46,7 @@ trait Boxable:
           (identifier))
         definition: (function_definition
           name: (identifier)
-          parameters: (parameters)
+          argument_list: (argument_list)
           body: (block
             (ellipsis))))
       (decorated_definition
@@ -54,7 +54,7 @@ trait Boxable:
           (identifier))
         definition: (function_definition
           name: (identifier)
-          parameters: (parameters)
+          argument_list: (argument_list)
           body: (block
             (pass_statement)))))))
 
@@ -85,7 +85,7 @@ trait Child(Parent):
 (module
   (trait_definition
     name: (identifier)
-    supertraits: (argument_list
+    supertraits: (call_argument_list
       (identifier))
     body: (block
       (pass_statement))))

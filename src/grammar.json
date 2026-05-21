@@ -1424,7 +1424,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "type_parameter_list"
+                "name": "parameter_list"
               },
               {
                 "type": "BLANK"
@@ -1434,10 +1434,10 @@
         },
         {
           "type": "FIELD",
-          "name": "parameters",
+          "name": "argument_list",
           "content": {
             "type": "SYMBOL",
-            "name": "parameters"
+            "name": "argument_list"
           }
         },
         {
@@ -1549,7 +1549,7 @@
         }
       ]
     },
-    "parameters": {
+    "argument_list": {
       "type": "SEQ",
       "members": [
         {
@@ -1561,7 +1561,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "_parameters"
+              "name": "_arguments"
             },
             {
               "type": "BLANK"
@@ -1574,9 +1574,9 @@
         }
       ]
     },
-    "lambda_parameters": {
+    "lambda_arguments": {
       "type": "SYMBOL",
-      "name": "_parameters"
+      "name": "_arguments"
     },
     "list_splat": {
       "type": "SEQ",
@@ -1796,7 +1796,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "type_parameter_list"
+                "name": "parameter_list"
               },
               {
                 "type": "BLANK"
@@ -1812,7 +1812,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "argument_list"
+                "name": "call_argument_list"
               },
               {
                 "type": "BLANK"
@@ -1834,7 +1834,7 @@
         }
       ]
     },
-    "type_parameter_list": {
+    "parameter_list": {
       "type": "SEQ",
       "members": [
         {
@@ -1959,7 +1959,7 @@
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "argument_list"
+                "name": "call_argument_list"
               },
               {
                 "type": "BLANK"
@@ -2016,7 +2016,7 @@
         ]
       }
     },
-    "argument_list": {
+    "call_argument_list": {
       "type": "SEQ",
       "members": [
         {
@@ -2904,7 +2904,7 @@
         ]
       }
     },
-    "_parameters": {
+    "_arguments": {
       "type": "SEQ",
       "members": [
         {
@@ -2912,7 +2912,7 @@
           "members": [
             {
               "type": "SYMBOL",
-              "name": "parameter"
+              "name": "argument"
             },
             {
               "type": "REPEAT",
@@ -2925,7 +2925,7 @@
                   },
                   {
                     "type": "SYMBOL",
-                    "name": "parameter"
+                    "name": "argument"
                   }
                 ]
               }
@@ -2988,7 +2988,7 @@
         }
       ]
     },
-    "parameter": {
+    "argument": {
       "type": "CHOICE",
       "members": [
         {
@@ -2997,19 +2997,19 @@
         },
         {
           "type": "SYMBOL",
-          "name": "typed_value_parameter"
+          "name": "typed_argument"
         },
         {
           "type": "SYMBOL",
-          "name": "self_parameter"
+          "name": "self_argument"
         },
         {
           "type": "SYMBOL",
-          "name": "default_parameter"
+          "name": "default_argument"
         },
         {
           "type": "SYMBOL",
-          "name": "typed_default_parameter"
+          "name": "typed_default_argument"
         },
         {
           "type": "SYMBOL",
@@ -3116,7 +3116,7 @@
         }
       ]
     },
-    "self_parameter": {
+    "self_argument": {
       "type": "SEQ",
       "members": [
         {
@@ -3150,7 +3150,7 @@
         }
       ]
     },
-    "default_parameter": {
+    "default_argument": {
       "type": "SEQ",
       "members": [
         {
@@ -3184,7 +3184,7 @@
         }
       ]
     },
-    "typed_default_parameter": {
+    "typed_default_argument": {
       "type": "PREC",
       "value": -1,
       "content": {
@@ -4203,13 +4203,13 @@
           },
           {
             "type": "FIELD",
-            "name": "parameters",
+            "name": "argument_list",
             "content": {
               "type": "CHOICE",
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "lambda_parameters"
+                  "name": "lambda_arguments"
                 },
                 {
                   "type": "BLANK"
@@ -4241,13 +4241,13 @@
         },
         {
           "type": "FIELD",
-          "name": "parameters",
+          "name": "argument_list",
           "content": {
             "type": "CHOICE",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "lambda_parameters"
+                "name": "lambda_arguments"
               },
               {
                 "type": "BLANK"
@@ -4922,7 +4922,7 @@
               "members": [
                 {
                   "type": "SYMBOL",
-                  "name": "type_parameter_list"
+                  "name": "parameter_list"
                 },
                 {
                   "type": "BLANK"
@@ -4942,7 +4942,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "argument_list"
+                  "name": "call_argument_list"
                 }
               ]
             }
@@ -4972,7 +4972,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "argument_list"
+                  "name": "call_argument_list"
                 }
               ]
             }
@@ -4980,7 +4980,7 @@
         ]
       }
     },
-    "typed_value_parameter": {
+    "typed_argument": {
       "type": "PREC",
       "value": -1,
       "content": {
@@ -5144,7 +5144,7 @@
           },
           {
             "type": "SYMBOL",
-            "name": "type_parameter_list"
+            "name": "parameter_list"
           }
         ]
       }
@@ -5236,10 +5236,10 @@
           },
           {
             "type": "FIELD",
-            "name": "parameters",
+            "name": "argument_list",
             "content": {
               "type": "SYMBOL",
-              "name": "function_pointer_parameters"
+              "name": "function_pointer_arguments"
             }
           },
           {
@@ -5264,7 +5264,7 @@
         ]
       }
     },
-    "function_pointer_parameters": {
+    "function_pointer_arguments": {
       "type": "SEQ",
       "members": [
         {
@@ -6623,15 +6623,15 @@
       "primary_expression"
     ],
     [
-      "argument_list",
+      "call_argument_list",
       "tuple"
     ],
     [
-      "argument_list",
+      "call_argument_list",
       "tuple_pattern"
     ],
     [
-      "argument_list",
+      "call_argument_list",
       "_collection_elements"
     ]
   ],
@@ -6713,7 +6713,7 @@
     "expression",
     "primary_expression",
     "pattern",
-    "parameter"
+    "argument"
   ],
   "reserved": {
     "global": [

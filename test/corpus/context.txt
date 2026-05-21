@@ -14,7 +14,7 @@ with open("input.txt") as f_in, open("output.txt", "w") as f_out:
         value: (as_pattern
           (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (string
                 (string_start)
                 (string_content)
@@ -25,7 +25,7 @@ with open("input.txt") as f_in, open("output.txt", "w") as f_out:
         value: (as_pattern
           (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (string
                 (string_start)
                 (string_content)
@@ -41,9 +41,9 @@ with open("input.txt") as f_in, open("output.txt", "w") as f_out:
         function: (attribute
           object: (identifier)
           attribute: (identifier))
-        arguments: (argument_list
+        arguments: (call_argument_list
           (call
             function: (attribute
               object: (identifier)
               attribute: (identifier))
-            arguments: (argument_list)))))))
+            arguments: (call_argument_list)))))))

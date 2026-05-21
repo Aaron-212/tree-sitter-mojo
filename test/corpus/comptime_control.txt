@@ -14,15 +14,15 @@ else:
     condition: (comparison_operator
       (call
         function: (identifier)
-        type_constraint: (type_parameter_list
+        type_constraint: (parameter_list
           (type
             (identifier)))
-        arguments: (argument_list))
+        arguments: (call_argument_list))
       (integer))
     consequence: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
@@ -31,7 +31,7 @@ else:
       body: (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)
@@ -51,10 +51,10 @@ comptime for i in range(3):
     left: (identifier)
     right: (call
       function: (identifier)
-      arguments: (argument_list
+      arguments: (call_argument_list
         (integer)))
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (identifier))))))

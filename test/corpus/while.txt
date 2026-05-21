@@ -16,7 +16,7 @@ while count < 10:
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (identifier)))
       (augmented_assignment
         left: (identifier)
@@ -44,7 +44,7 @@ while True:
         left: (identifier)
         right: (call
           function: (identifier)
-          arguments: (argument_list)))
+          arguments: (call_argument_list)))
       (if_statement
         condition: (comparison_operator
           (identifier)
@@ -55,13 +55,13 @@ while True:
         condition: (not_operator
           argument: (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (identifier))))
         consequence: (block
           (continue_statement)))
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (identifier))))))
 
 ===============
@@ -82,7 +82,7 @@ else:
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
@@ -92,7 +92,7 @@ else:
       body: (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)

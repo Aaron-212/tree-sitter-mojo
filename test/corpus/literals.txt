@@ -238,24 +238,24 @@ def greet() -> None:
     right: (none))
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
             (string_end))))))
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     return_type: (type
       (none))
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
@@ -291,20 +291,20 @@ struct Point:
           (identifier)))
       (function_definition
         name: (identifier)
-        parameters: (parameters)
+        argument_list: (argument_list)
         return_type: (type
           (self_type))
         body: (block
           (return_statement
             (call
               function: (self_type)
-              arguments: (argument_list
+              arguments: (call_argument_list
                 (float)
                 (float))))))
       (function_definition
         name: (identifier)
-        parameters: (parameters
-          (self_parameter))
+        argument_list: (argument_list
+          (self_argument))
         return_type: (type
           (identifier))
         body: (block
@@ -322,7 +322,7 @@ struct Point:
                         attribute: (identifier))
                       right: (integer))))
                 attribute: (identifier))
-              arguments: (argument_list))))))))
+              arguments: (call_argument_list))))))))
 
 =======
 Discard
@@ -339,7 +339,7 @@ _, y = get_pair()
       (identifier))
     right: (call
       function: (identifier)
-      arguments: (argument_list))))
+      arguments: (call_argument_list))))
 
 ========
 Ellipsis
@@ -356,8 +356,8 @@ trait Drawable:
     body: (block
       (function_definition
         name: (identifier)
-        parameters: (parameters
-          (self_parameter))
+        argument_list: (argument_list
+          (self_argument))
         return_type: (type
           (none))
         body: (block

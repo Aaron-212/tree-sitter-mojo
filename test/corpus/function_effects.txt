@@ -15,8 +15,8 @@ def fetch() raises NetworkError -> String:
 (module
   (function_definition
     name: (identifier)
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (identifier))))
@@ -32,7 +32,7 @@ def fetch() raises NetworkError -> String:
           (raise_statement
             (call
               function: (identifier)
-              arguments: (argument_list
+              arguments: (call_argument_list
                 (string
                   (string_start)
                   (string_content)
@@ -41,7 +41,7 @@ def fetch() raises NetworkError -> String:
         (true))))
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     raises_clause: (raises_clause
       error_type: (type
         (identifier)))
@@ -51,7 +51,7 @@ def fetch() raises NetworkError -> String:
       (raise_statement
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)
@@ -72,7 +72,7 @@ def map[
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (type_parameter_list
+    type_parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -85,28 +85,28 @@ def map[
             (identifier))
           (type
             (identifier)))))
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (function_pointer_type
-            parameters: (function_pointer_parameters
+            argument_list: (function_pointer_arguments
               (type
                 (identifier)))
             return_type: (type
               (identifier)))))
-      (typed_value_parameter
+      (typed_argument
         (identifier)
         type: (type
           (generic_type
             (identifier)
-            (type_parameter_list
+            (parameter_list
               (type
                 (identifier)))))))
     return_type: (type
       (generic_type
         (identifier)
-        (type_parameter_list
+        (parameter_list
           (type
             (identifier)))))
     body: (block
@@ -127,10 +127,10 @@ var sqrt = lib.get_function[def(Float64) thin abi("C") -> Float64]("sqrt")
       function: (attribute
         object: (identifier)
         attribute: (identifier))
-      type_constraint: (type_parameter_list
+      type_constraint: (parameter_list
         (type
           (function_pointer_type
-            parameters: (function_pointer_parameters
+            argument_list: (function_pointer_arguments
               (type
                 (identifier)))
             (string
@@ -139,7 +139,7 @@ var sqrt = lib.get_function[def(Float64) thin abi("C") -> Float64]("sqrt")
               (string_end))
             return_type: (type
               (identifier)))))
-      arguments: (argument_list
+      arguments: (call_argument_list
         (string
           (string_start)
           (string_content)
@@ -160,24 +160,24 @@ def double(x: Int) register_passable -> Int:
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (type_parameter_list
+    type_parameters: (parameter_list
       (type
         (constrained_type
           (type
             (identifier))
           (type
             (function_pointer_type
-              parameters: (function_pointer_parameters
+              argument_list: (function_pointer_arguments
                 (type
                   (identifier)))
               return_type: (type
                 (identifier)))))))
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (identifier)))
-      (typed_value_parameter
+      (typed_argument
         (identifier)
         type: (type
           (identifier))))
@@ -187,12 +187,12 @@ def double(x: Int) register_passable -> Int:
       (return_statement
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (identifier))))))
   (function_definition
     name: (identifier)
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (identifier))))

@@ -31,13 +31,13 @@ struct Point:
           (identifier)))
       (function_definition
         name: (identifier)
-        parameters: (parameters
-          (self_parameter)
-          (typed_value_parameter
+        argument_list: (argument_list
+          (self_argument)
+          (typed_argument
             (identifier)
             type: (type
               (identifier)))
-          (typed_value_parameter
+          (typed_argument
             (identifier)
             type: (type
               (identifier))))
@@ -52,18 +52,18 @@ struct Point:
             right: (identifier))))
       (function_definition
         name: (identifier)
-        parameters: (parameters
-          (self_parameter))
+        argument_list: (argument_list
+          (self_argument))
         return_type: (type
           (identifier))
         body: (block
           (return_statement
             (call
               function: (identifier)
-              arguments: (argument_list
+              arguments: (call_argument_list
                 (call
                   function: (identifier)
-                  arguments: (argument_list
+                  arguments: (call_argument_list
                     (binary_operator
                       left: (binary_operator
                         left: (attribute
@@ -94,7 +94,7 @@ struct Name[T: Writable & Copyable & ImplicitlyDestructible](TraitA, TraitB):
 (module
   (struct_definition
     name: (identifier)
-    type_parameters: (type_parameter_list
+    type_parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -109,14 +109,14 @@ struct Name[T: Writable & Copyable & ImplicitlyDestructible](TraitA, TraitB):
       (pass_statement)))
   (struct_definition
     name: (identifier)
-    traits: (argument_list
+    traits: (call_argument_list
       (identifier)
       (identifier))
     body: (block
       (pass_statement)))
   (struct_definition
     name: (identifier)
-    type_parameters: (type_parameter_list
+    type_parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -127,7 +127,7 @@ struct Name[T: Writable & Copyable & ImplicitlyDestructible](TraitA, TraitB):
                 left: (identifier)
                 right: (identifier))
               right: (identifier))))))
-    traits: (argument_list
+    traits: (call_argument_list
       (identifier)
       (identifier))
     body: (block

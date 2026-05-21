@@ -12,12 +12,12 @@ for i in range(10):
     left: (identifier)
     right: (call
       function: (identifier)
-      arguments: (argument_list
+      arguments: (call_argument_list
         (integer)))
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (identifier))))))
 
 =============
@@ -51,7 +51,7 @@ else:
       body: (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)

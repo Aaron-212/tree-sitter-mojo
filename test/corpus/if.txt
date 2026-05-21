@@ -21,7 +21,7 @@ else:
     consequence: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
@@ -33,7 +33,7 @@ else:
       consequence: (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)
@@ -45,7 +45,7 @@ else:
       consequence: (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)
@@ -54,7 +54,7 @@ else:
       body: (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (string
               (string_start)
               (string_content)
@@ -72,7 +72,7 @@ def main():
 (module
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (if_statement
         condition: (comparison_operator
@@ -81,7 +81,7 @@ def main():
         consequence: (block
           (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (string
                 (string_start)
                 (string_content)

@@ -16,19 +16,19 @@ def do_nothing():
 (module
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
             (string_end))))))
   (function_definition
     name: (identifier)
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (identifier))))
@@ -44,7 +44,7 @@ def do_nothing():
           (string_end)))))
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (pass_statement))))
 
@@ -66,7 +66,7 @@ def clamp[T: Comparable & ImplicitlyCopyable](
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (type_parameter_list
+    type_parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -75,16 +75,16 @@ def clamp[T: Comparable & ImplicitlyCopyable](
             (binary_operator
               left: (identifier)
               right: (identifier))))))
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (identifier)))
-      (typed_value_parameter
+      (typed_argument
         (identifier)
         type: (type
           (identifier)))
-      (typed_value_parameter
+      (typed_argument
         (identifier)
         type: (type
           (identifier))))
@@ -126,7 +126,7 @@ def main():
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (type_parameter_list
+    type_parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -134,15 +134,15 @@ def main():
           (type
             (identifier))))
       (infer_only_marker))
-    parameters: (parameters
-      (typed_value_parameter
+    argument_list: (argument_list
+      (typed_argument
         (identifier)
         type: (type
           (identifier))))
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
@@ -152,35 +152,35 @@ def main():
             (interpolation
               expression: (call
                 function: (identifier)
-                type_constraint: (type_parameter_list
+                type_constraint: (parameter_list
                   (type
                     (identifier)))
-                arguments: (argument_list)))
+                arguments: (call_argument_list)))
             (string_content)
             (string_end))))))
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (integer)))
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
             (string_end))))
       (call
         function: (identifier)
-        type_constraint: (type_parameter_list
+        type_constraint: (parameter_list
           (type
             (identifier))
           (type
             (identifier)))
-        arguments: (argument_list
+        arguments: (call_argument_list
           (integer))))))
 
 
@@ -202,22 +202,22 @@ def main():
       (escaped_identifier_start)
       (escaped_identifier_content)
       (escaped_identifier_end))
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (string
             (string_start)
             (string_content)
             (string_end))))))
   (function_definition
     name: (identifier)
-    parameters: (parameters)
+    argument_list: (argument_list)
     body: (block
       (call
         function: (identifier
           (escaped_identifier_start)
           (escaped_identifier_content)
           (escaped_identifier_end))
-        arguments: (argument_list)))))
+        arguments: (call_argument_list)))))

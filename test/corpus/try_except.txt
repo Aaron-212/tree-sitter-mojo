@@ -18,21 +18,21 @@ finally:
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list)))
+        arguments: (call_argument_list)))
     (except_clause
       value: (identifier)
       (block
         (call
           function: (identifier)
-          arguments: (argument_list
+          arguments: (call_argument_list
             (identifier)))))
     (else_clause
       body: (block
         (call
           function: (identifier)
-          arguments: (argument_list))))
+          arguments: (call_argument_list))))
     (finally_clause
       (block
         (call
           function: (identifier)
-          arguments: (argument_list))))))
+          arguments: (call_argument_list))))))

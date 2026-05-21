@@ -73,13 +73,13 @@ while (name := input("Prompt: ")) != "quit":
           name: (identifier)
           value: (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (identifier)))))
       (integer))
     consequence: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (identifier)))))
   (while_statement
     condition: (comparison_operator
@@ -88,7 +88,7 @@ while (name := input("Prompt: ")) != "quit":
           name: (identifier)
           value: (call
             function: (identifier)
-            arguments: (argument_list
+            arguments: (call_argument_list
               (string
                 (string_start)
                 (string_content)
@@ -100,7 +100,7 @@ while (name := input("Prompt: ")) != "quit":
     body: (block
       (call
         function: (identifier)
-        arguments: (argument_list
+        arguments: (call_argument_list
           (identifier))))))
 
 ===================
@@ -115,7 +115,7 @@ var x = comptime(heavy_calculation())
   (assignment
     left: (identifier)
     right: (comptime_call
-      arguments: (argument_list
+      arguments: (call_argument_list
         (call
           function: (identifier)
-          arguments: (argument_list))))))
+          arguments: (call_argument_list))))))
