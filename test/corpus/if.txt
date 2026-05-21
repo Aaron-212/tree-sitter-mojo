@@ -2,15 +2,70 @@
 If Statement
 ============
 
+if x > 0:
+    print("positive")
+elif x < 0:
+    print("negative")
+elif x == 0:
+    print("zero")
+else:
+    print("you should never get here")
+
+---
+
+(module
+  (if_statement
+    condition: (comparison_operator
+      (identifier)
+      (integer))
+    consequence: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end)))))
+    alternative: (elif_clause
+      condition: (comparison_operator
+        (identifier)
+        (integer))
+      consequence: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))))))
+    alternative: (elif_clause
+      condition: (comparison_operator
+        (identifier)
+        (integer))
+      consequence: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))))))
+    alternative: (else_clause
+      body: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))))))))
+
+=========
+Inline If
+=========
+
 def main():
-    if x > 0:
-        print("positive")
-    elif x < 0:
-        print("negative")
-    elif x == 0:
-        print("zero")
-    else:
-        print("you should never get here")
+    if x > 0: print("positive")
 
 ---
 
@@ -30,37 +85,4 @@ def main():
               (string
                 (string_start)
                 (string_content)
-                (string_end)))))
-        alternative: (elif_clause
-          condition: (comparison_operator
-            (identifier)
-            (integer))
-          consequence: (block
-            (call
-              function: (identifier)
-              arguments: (argument_list
-                (string
-                  (string_start)
-                  (string_content)
-                  (string_end))))))
-        alternative: (elif_clause
-          condition: (comparison_operator
-            (identifier)
-            (integer))
-          consequence: (block
-            (call
-              function: (identifier)
-              arguments: (argument_list
-                (string
-                  (string_start)
-                  (string_content)
-                  (string_end))))))
-        alternative: (else_clause
-          body: (block
-            (call
-              function: (identifier)
-              arguments: (argument_list
-                (string
-                  (string_start)
-                  (string_content)
-                  (string_end))))))))))
+                (string_end)))))))))

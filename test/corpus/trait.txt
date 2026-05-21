@@ -1,0 +1,91 @@
+=============
+Complex Trait
+=============
+
+trait Boxable:
+    comptime Associated: Writable & Copyable & ImplicitlyDestructible
+
+    def unbox(self) -> Self.Associated:
+        ...
+
+    @staticmethod
+    def required_static_method():
+        ...
+
+    @staticmethod
+    def optioanl_static_method():
+        pass
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    body: (block
+      (assignment
+        left: (identifier)
+        type: (type
+          (binary_operator
+            left: (binary_operator
+              left: (identifier)
+              right: (identifier))
+            right: (identifier))))
+      (function_definition
+        name: (identifier)
+        parameters: (parameters
+          (self_parameter))
+        return_type: (type
+          (attribute
+            object: (identifier)
+            attribute: (identifier)))
+        body: (block
+          (ellipsis)))
+      (decorated_definition
+        (decorator
+          (identifier))
+        definition: (function_definition
+          name: (identifier)
+          parameters: (parameters)
+          body: (block
+            (ellipsis))))
+      (decorated_definition
+        (decorator
+          (identifier))
+        definition: (function_definition
+          name: (identifier)
+          parameters: (parameters)
+          body: (block
+            (pass_statement)))))))
+
+============
+Marker Trait
+============
+
+trait AnyType:
+    pass
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    body: (block
+      (pass_statement))))
+
+
+===========
+Child Trait
+===========
+
+trait Child(Parent):
+    pass
+
+---
+
+(module
+  (trait_definition
+    name: (identifier)
+    supertraits: (argument_list
+      (identifier))
+    body: (block
+      (pass_statement))))

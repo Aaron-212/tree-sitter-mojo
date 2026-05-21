@@ -1,0 +1,39 @@
+=======
+Imports
+=======
+
+import math
+from collections import Dict, Set
+import numpy as np
+from collections import Dict as Dictionary
+from math import *
+
+---
+
+(module
+  (import_statement
+    name: (dotted_name
+      (identifier)))
+  (import_from_statement
+    module_name: (dotted_name
+      (identifier))
+    name: (dotted_name
+      (identifier))
+    name: (dotted_name
+      (identifier)))
+  (import_statement
+    name: (aliased_import
+      name: (dotted_name
+        (identifier))
+      alias: (identifier)))
+  (import_from_statement
+    module_name: (dotted_name
+      (identifier))
+    name: (aliased_import
+      name: (dotted_name
+        (identifier))
+      alias: (identifier)))
+  (import_from_statement
+    module_name: (dotted_name
+      (identifier))
+    (wildcard_import)))

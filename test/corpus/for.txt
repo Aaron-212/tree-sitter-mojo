@@ -1,0 +1,58 @@
+========
+For Loop
+========
+
+for i in range(10):
+    print(i)
+
+---
+
+(module
+  (for_statement
+    left: (identifier)
+    right: (call
+      function: (identifier)
+      arguments: (argument_list
+        (integer)))
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (identifier))))))
+
+=============
+For Else Loop
+=============
+
+for item in items:
+    if item == target:
+        found = True
+        break
+else:
+    print("not found")
+
+---
+
+(module
+  (for_statement
+    left: (identifier)
+    right: (identifier)
+    body: (block
+      (if_statement
+        condition: (comparison_operator
+          (identifier)
+          (identifier))
+        consequence: (block
+          (assignment
+            left: (identifier)
+            right: (true))
+          (break_statement))))
+    alternative: (else_clause
+      body: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))))))))

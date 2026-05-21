@@ -2,42 +2,37 @@
 Try Except Statement
 ====================
 
-def main():
-    try:
-        operation()
-    except e:
-        handle_error(e)
-    else:
-        on_success()
-    finally:
-        cleanup()
+try:
+    operation()
+except e:
+    handle_error(e)
+else:
+    on_success()
+finally:
+    cleanup()
 
 ---
 
 (module
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
+  (try_statement
     body: (block
-      (try_statement
-        body: (block
-          (call
-            function: (identifier)
-            arguments: (argument_list)))
-        (except_clause
-          value: (identifier)
-          (block
-            (call
-              function: (identifier)
-              arguments: (argument_list
-                (identifier)))))
-        (else_clause
-          body: (block
-            (call
-              function: (identifier)
-              arguments: (argument_list))))
-        (finally_clause
-          (block
-            (call
-              function: (identifier)
-              arguments: (argument_list))))))))
+      (call
+        function: (identifier)
+        arguments: (argument_list)))
+    (except_clause
+      value: (identifier)
+      (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (identifier)))))
+    (else_clause
+      body: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list))))
+    (finally_clause
+      (block
+        (call
+          function: (identifier)
+          arguments: (argument_list))))))

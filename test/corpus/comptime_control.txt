@@ -1,0 +1,60 @@
+===========
+Comptime If
+===========
+
+comptime if size_of[Int]() == 8:
+    print("64-bit")
+else:
+    print("Probably 32-bit")
+
+---
+
+(module
+  (if_statement
+    condition: (comparison_operator
+      (call
+        function: (identifier)
+        type_constraint: (type_parameter
+          (type
+            (identifier)))
+        arguments: (argument_list))
+      (integer))
+    consequence: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end)))))
+    alternative: (else_clause
+      body: (block
+        (call
+          function: (identifier)
+          arguments: (argument_list
+            (string
+              (string_start)
+              (string_content)
+              (string_end))))))))
+
+============
+Comptime For
+============
+
+comptime for i in range(3):
+    print(i)
+
+---
+
+(module
+  (for_statement
+    left: (identifier)
+    right: (call
+      function: (identifier)
+      arguments: (argument_list
+        (integer)))
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (identifier))))))

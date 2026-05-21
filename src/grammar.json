@@ -1,7 +1,7 @@
 {
   "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
   "name": "mojo",
-  "word": "identifier",
+  "word": "_identifier",
   "rules": {
     "module": {
       "type": "REPEAT",
@@ -1761,7 +1761,7 @@
         },
         {
           "type": "FIELD",
-          "name": "superstructs",
+          "name": "traits",
           "content": {
             "type": "CHOICE",
             "members": [
@@ -1807,6 +1807,10 @@
                   "name": "type"
                 },
                 {
+                  "type": "SYMBOL",
+                  "name": "infer_only_marker"
+                },
+                {
                   "type": "SEQ",
                   "members": [
                     {
@@ -1840,6 +1844,10 @@
                       {
                         "type": "SYMBOL",
                         "name": "type"
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "infer_only_marker"
                       },
                       {
                         "type": "SEQ",
@@ -1900,13 +1908,13 @@
         },
         {
           "type": "FIELD",
-          "name": "type_parameters",
+          "name": "supertraits",
           "content": {
             "type": "CHOICE",
             "members": [
               {
                 "type": "SYMBOL",
-                "name": "type_parameter"
+                "name": "argument_list"
               },
               {
                 "type": "BLANK"
@@ -4989,10 +4997,6 @@
         {
           "type": "SYMBOL",
           "name": "member_type"
-        },
-        {
-          "type": "STRING",
-          "value": "//"
         }
       ]
     },
@@ -6245,6 +6249,35 @@
       }
     },
     "identifier": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_identifier"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "special_identifier_start"
+            },
+            {
+              "type": "REPEAT1",
+              "content": {
+                "type": "SYMBOL",
+                "name": "special_identifier_content"
+              }
+            },
+            {
+              "type": "SYMBOL",
+              "name": "special_identifier_end"
+            }
+          ]
+        }
+      ]
+    },
+    "_identifier": {
       "type": "PATTERN",
       "value": "[a-zA-Z_][a-zA-Z0-9_]*"
     },
@@ -6354,6 +6387,10 @@
         ]
       }
     },
+    "infer_only_marker": {
+      "type": "STRING",
+      "value": "//"
+    },
     "positional_separator": {
       "type": "STRING",
       "value": "/"
@@ -6440,6 +6477,18 @@
     {
       "type": "SYMBOL",
       "name": "string_end"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "special_identifier_start"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "special_identifier_content"
+    },
+    {
+      "type": "SYMBOL",
+      "name": "special_identifier_end"
     },
     {
       "type": "SYMBOL",

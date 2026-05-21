@@ -1,0 +1,63 @@
+====
+MLIR
+====
+
+def main():
+    var a: __mlir_type.index = __mlir_attr.`42 : index`
+    var b: __mlir_type.index = __mlir_attr.`8 : index`
+    var c = __mlir_op.`index.add`(a, b)
+    print(Int(mlir_value=c))  # 50
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (assignment
+        left: (identifier)
+        type: (type
+          (attribute
+            object: (identifier)
+            attribute: (identifier)))
+        right: (attribute
+          object: (identifier)
+          attribute: (identifier
+            (special_identifier_start)
+            (special_identifier_content)
+            (special_identifier_end))))
+      (assignment
+        left: (identifier)
+        type: (type
+          (attribute
+            object: (identifier)
+            attribute: (identifier)))
+        right: (attribute
+          object: (identifier)
+          attribute: (identifier
+            (special_identifier_start)
+            (special_identifier_content)
+            (special_identifier_end))))
+      (assignment
+        left: (identifier)
+        right: (call
+          function: (attribute
+            object: (identifier)
+            attribute: (identifier
+              (special_identifier_start)
+              (special_identifier_content)
+              (special_identifier_end)))
+          arguments: (argument_list
+            (identifier)
+            (identifier))))
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (call
+            function: (identifier)
+            arguments: (argument_list
+              (keyword_argument
+                name: (identifier)
+                value: (identifier))))))
+      (comment))))

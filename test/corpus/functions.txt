@@ -6,7 +6,7 @@ def main():
     print("Hello, World!")
 
 def greet(name: String) -> String:
-    pass
+    return f"Hello, {name}"
 
 def do_nothing():
     pass
@@ -35,7 +35,13 @@ def do_nothing():
     return_type: (type
       (identifier))
     body: (block
-      (pass_statement)))
+      (return_statement
+        (string
+          (string_start)
+          (string_content)
+          (interpolation
+            expression: (identifier))
+          (string_end)))))
   (function_definition
     name: (identifier)
     parameters: (parameters)
@@ -120,3 +126,104 @@ def fetch() raises NetworkError -> String:
               (string_content)
               (string_end))
             (integer)))))))
+
+
+===================
+Function Parameters
+===================
+
+def inferred_type[T: Writable, //](value: T):
+    print(t"Value is {value}. Type is {get_type_name[T]()}.")
+
+def main():
+    inferred_type(5)
+    inferred_type("Hello")
+    inferred_type[T=Int](5)
+
+---
+
+(module
+  (function_definition
+    name: (identifier)
+    type_parameters: (type_parameter
+      (type
+        (constrained_type
+          (type
+            (identifier))
+          (type
+            (identifier))))
+      (infer_only_marker))
+    parameters: (parameters
+      (typed_parameter
+        (identifier)
+        type: (type
+          (identifier))))
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (interpolation
+              expression: (identifier))
+            (string_content)
+            (interpolation
+              expression: (call
+                function: (identifier)
+                type_constraint: (type_parameter
+                  (type
+                    (identifier)))
+                arguments: (argument_list)))
+            (string_content)
+            (string_end))))))
+  (function_definition
+    name: (identifier)
+    parameters: (parameters)
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (integer)))
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end))))
+      (call
+        function: (identifier)
+        type_constraint: (type_parameter
+          (type
+            (identifier))
+          (type
+            (identifier)))
+        arguments: (argument_list
+          (integer))))))
+
+
+================================
+Special Identifier Name Funciton
+================================
+
+def `import`():
+    print("In `import`")
+
+---
+
+(module
+  (function_definition
+    name: (identifier
+      (special_identifier_start)
+      (special_identifier_content)
+      (special_identifier_end))
+    parameters: (parameters)
+    body: (block
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (string
+            (string_start)
+            (string_content)
+            (string_end)))))))

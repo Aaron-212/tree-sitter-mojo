@@ -1848,6 +1848,29 @@
     }
   },
   {
+    "type": "identifier",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "special_identifier_content",
+          "named": true
+        },
+        {
+          "type": "special_identifier_end",
+          "named": true
+        },
+        {
+          "type": "special_identifier_start",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "if_clause",
     "named": true,
     "fields": {},
@@ -1970,6 +1993,11 @@
         ]
       }
     }
+  },
+  {
+    "type": "infer_only_marker",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "interpolation",
@@ -2781,7 +2809,7 @@
           }
         ]
       },
-      "superstructs": {
+      "traits": {
         "multiple": false,
         "required": false,
         "types": [
@@ -2876,12 +2904,12 @@
           }
         ]
       },
-      "type_parameters": {
+      "supertraits": {
         "multiple": false,
         "required": false,
         "types": [
           {
-            "type": "type_parameter",
+            "type": "argument_list",
             "named": true
           }
         ]
@@ -3015,7 +3043,7 @@
     "fields": {},
     "children": {
       "multiple": false,
-      "required": false,
+      "required": true,
       "types": [
         {
           "type": "constrained_type",
@@ -3078,6 +3106,10 @@
       "multiple": true,
       "required": true,
       "types": [
+        {
+          "type": "infer_only_marker",
+          "named": true
+        },
         {
           "type": "type",
           "named": true
@@ -3666,10 +3698,6 @@
     "named": false
   },
   {
-    "type": "identifier",
-    "named": true
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -3749,6 +3777,18 @@
   {
     "type": "self",
     "named": false
+  },
+  {
+    "type": "special_identifier_content",
+    "named": true
+  },
+  {
+    "type": "special_identifier_end",
+    "named": true
+  },
+  {
+    "type": "special_identifier_start",
+    "named": true
   },
   {
     "type": "string_end",

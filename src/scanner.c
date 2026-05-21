@@ -14,6 +14,9 @@ enum TokenType {
     STRING_CONTENT,
     ESCAPE_INTERPOLATION,
     STRING_END,
+    SPECIAL_IDENTIFIER_START,
+    SPECIAL_IDENTIFIER_CONTENT,
+    SPECIAL_IDENTIFIER_END,
     COMMENT,
     CLOSE_PAREN,
     CLOSE_BRACKET,
@@ -234,6 +237,27 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
         }
     }
 
+    if (valid_symbols[SPECIAL_IDENTIFIER_CONTENT]) {
+        bool has_content = false;
+        while (lexer->lookahead && lexer->lookahead != '`' &&
+               lexer->lookahead != '\n') {
+            advance(lexer);
+            has_content = true;
+        }
+        if (has_content) {
+            lexer->mark_end(lexer);
+            lexer->result_symbol = SPECIAL_IDENTIFIER_CONTENT;
+            return true;
+        }
+    }
+
+    if (valid_symbols[SPECIAL_IDENTIFIER_END] && lexer->lookahead == '`') {
+        advance(lexer);
+        lexer->mark_end(lexer);
+        lexer->result_symbol = SPECIAL_IDENTIFIER_END;
+        return true;
+    }
+
     lexer->mark_end(lexer);
 
     bool found_end_of_line = false;
@@ -302,9 +326,8 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
                 return true;
             }
 
-            bool next_tok_is_string_start = lexer->lookahead == '\"' ||
-                                            lexer->lookahead == '\'' ||
-                                            lexer->lookahead == '`';
+            bool next_tok_is_string_start = lexer->lookahead == '"' ||
+                                            lexer->lookahead == '\'';
 
             if ((valid_symbols[DEDENT] ||
                  (!valid_symbols[NEWLINE] &&
@@ -329,6 +352,14 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
         }
     }
 
+    if (first_comment_indent_length == -1 &&
+        valid_symbols[SPECIAL_IDENTIFIER_START] && lexer->lookahead == '`') {
+        advance(lexer);
+        lexer->mark_end(lexer);
+        lexer->result_symbol = SPECIAL_IDENTIFIER_START;
+        return true;
+    }
+
     if (first_comment_indent_length == -1 && valid_symbols[STRING_START]) {
         Delimiter delimiter = new_delimiter();
 
@@ -348,11 +379,7 @@ bool tree_sitter_mojo_external_scanner_scan(void *payload, TSLexer *lexer,
             advance(lexer);
         }
 
-        if (lexer->lookahead == '`') {
-            set_end_character(&delimiter, '`');
-            advance(lexer);
-            lexer->mark_end(lexer);
-        } else if (lexer->lookahead == '\'') {
+        if (lexer->lookahead == '\'') {
             set_end_character(&delimiter, '\'');
             advance(lexer);
             lexer->mark_end(lexer);

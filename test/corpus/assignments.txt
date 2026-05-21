@@ -2,101 +2,96 @@
 Assignments
 ===========
 
-def main():
-    var x = 42
-    var name = "Alice"
-    var result: List[Int]
-    var hello: Int = 67
+var x = 42
+var name = "Alice"
+var result: List[Int]
+var hello: Int = 67
 
-    name: String = "Alice"
-    values: List[Float64] = []
-    comptime Vec3 = List[Float64]
-    var position: Vec3 = [0.0, 0.0, 0.0]
+name: String = "Alice"
+values: List[Float64] = []
+comptime Vec3 = List[Float64]
+var position: Vec3 = [0.0, 0.0, 0.0]
 
-    x = y = z = 0
-    a, b = 1, 2
-    (a, b) = (1, 2)
+x = y = z = 0
+a, b = 1, 2
+(a, b) = (1, 2)
 
 ---
 
 (module
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
-    body: (block
-      (assignment
+  (assignment
+    left: (identifier)
+    right: (integer))
+  (assignment
+    left: (identifier)
+    right: (string
+      (string_start)
+      (string_content)
+      (string_end)))
+  (assignment
+    left: (identifier)
+    type: (type
+      (generic_type
+        (identifier)
+        (type_parameter
+          (type
+            (identifier))))))
+  (assignment
+    left: (identifier)
+    type: (type
+      (identifier))
+    right: (integer))
+  (assignment
+    left: (identifier)
+    type: (type
+      (identifier))
+    right: (string
+      (string_start)
+      (string_content)
+      (string_end)))
+  (assignment
+    left: (identifier)
+    type: (type
+      (generic_type
+        (identifier)
+        (type_parameter
+          (type
+            (identifier)))))
+    right: (list))
+  (assignment
+    left: (identifier)
+    right: (type
+      (generic_type
+        (identifier)
+        (type_parameter
+          (type
+            (identifier))))))
+  (assignment
+    left: (identifier)
+    type: (type
+      (identifier))
+    right: (list
+      (float)
+      (float)
+      (float)))
+  (assignment
+    left: (identifier)
+    right: (assignment
+      left: (identifier)
+      right: (assignment
         left: (identifier)
-        right: (integer))
-      (assignment
-        left: (identifier)
-        right: (string
-          (string_start)
-          (string_content)
-          (string_end)))
-      (assignment
-        left: (identifier)
-        type: (type
-          (generic_type
-            (identifier)
-            (type_parameter
-              (type
-                (identifier))))))
-      (assignment
-        left: (identifier)
-        type: (type
-          (identifier))
-        right: (integer))
-      (assignment
-        left: (identifier)
-        type: (type
-          (identifier))
-        right: (string
-          (string_start)
-          (string_content)
-          (string_end)))
-      (assignment
-        left: (identifier)
-        type: (type
-          (generic_type
-            (identifier)
-            (type_parameter
-              (type
-                (identifier)))))
-        right: (list))
-      (assignment
-        left: (identifier)
-        right: (type
-          (generic_type
-            (identifier)
-            (type_parameter
-              (type
-                (identifier))))))
-      (assignment
-        left: (identifier)
-        type: (type
-          (identifier))
-        right: (list
-          (float)
-          (float)
-          (float)))
-      (assignment
-        left: (identifier)
-        right: (assignment
-          left: (identifier)
-          right: (assignment
-            left: (identifier)
-            right: (integer))))
-      (assignment
-        left: (pattern_list
-          (identifier)
-          (identifier))
-        right: (expression_list
-          (integer)
-          (integer)))
-      (assignment
-        left: (tuple_pattern
-          (identifier)
-          (identifier))
-        right: (tuple
-            (integer)
-            (integer))))))
+        right: (integer))))
+  (assignment
+    left: (pattern_list
+      (identifier)
+      (identifier))
+    right: (expression_list
+      (integer)
+      (integer)))
+  (assignment
+    left: (tuple_pattern
+      (identifier)
+      (identifier))
+    right: (tuple
+      (integer)
+      (integer))))

@@ -1,46 +1,65 @@
-===============
-While Statement
-===============
+==================
+Regular While Loop
+==================
 
-def main():
-    while True:
-        var item = get_next()
-        if item is None:
-            break
-        if not is_valid(item):
-            continue
-        process(item)
+while count < 10:
+    print(count)
+      count += 1
 
 ---
 
 (module
-  (function_definition
-    name: (identifier)
-    parameters: (parameters)
+  (while_statement
+    condition: (comparison_operator
+      (identifier)
+      (integer))
     body: (block
-      (while_statement
-        condition: (true)
-        body: (block
-          (assignment
-            left: (identifier)
-            right: (call
-              function: (identifier)
-              arguments: (argument_list)))
-          (if_statement
-            condition: (comparison_operator
-              (identifier)
-              (none))
-            consequence: (block
-              (break_statement)))
-          (if_statement
-            condition: (not_operator
-              argument: (call
-                function: (identifier)
-                arguments: (argument_list
-                  (identifier))))
-            consequence: (block
-              (continue_statement)))
-          (call
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (identifier)))
+      (augmented_assignment
+        left: (identifier)
+        right: (integer)))))
+
+===================
+Infinite While Loop
+===================
+
+while True:
+    var item = get_next()
+    if item is None:
+        break
+    if not is_valid(item):
+        continue
+    process(item)
+
+---
+
+(module
+  (while_statement
+    condition: (true)
+    body: (block
+      (assignment
+        left: (identifier)
+        right: (call
+          function: (identifier)
+          arguments: (argument_list)))
+      (if_statement
+        condition: (comparison_operator
+          (identifier)
+          (none))
+        consequence: (block
+          (break_statement)))
+      (if_statement
+        condition: (not_operator
+          argument: (call
             function: (identifier)
             arguments: (argument_list
-              (identifier))))))))
+              (identifier))))
+        consequence: (block
+          (continue_statement)))
+      (call
+        function: (identifier)
+        arguments: (argument_list
+          (identifier))))))

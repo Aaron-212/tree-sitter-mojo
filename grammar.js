@@ -71,6 +71,9 @@ export default grammar({
     $._string_content,
     $.escape_interpolation,
     $.string_end,
+    $.special_identifier_start,
+    $.special_identifier_content,
+    $.special_identifier_end,
 
     // Mark comments as external tokens so that the external scanner is always
     // invoked, even if no external token is expected. This allows for better
@@ -134,7 +137,7 @@ export default grammar({
     ],
   },
 
-  word: ($) => $.identifier,
+  word: ($) => $._identifier,
 
   rules: {
     module: ($) => repeat($._statement),
@@ -404,14 +407,16 @@ export default grammar({
         "struct",
         field("name", $.identifier),
         field("type_parameters", optional($.type_parameter)),
-        field("superstructs", optional($.argument_list)),
+        field("traits", optional($.argument_list)),
         ":",
         field("body", $._suite)
       ),
     type_parameter: ($) =>
       seq(
         "[",
-        commaSep1(choice($.type, seq($.type, "=", $.type))),
+        commaSep1(
+          choice($.type, $.infer_only_marker, seq($.type, "=", $.type))
+        ),
         optional(","),
         "]"
       ),
@@ -420,7 +425,7 @@ export default grammar({
       seq(
         "trait",
         field("name", $.identifier),
-        field("type_parameters", optional($.type_parameter)),
+        field("supertraits", optional($.argument_list)),
         ":",
         field("body", $._suite)
       ),
@@ -970,8 +975,7 @@ export default grammar({
         $.generic_type,
         $.union_type,
         $.constrained_type,
-        $.member_type,
-        "//"
+        $.member_type
       ),
     splat_type: ($) => prec(1, seq(choice("*", "**"), $.identifier)),
     generic_type: ($) =>
@@ -1163,7 +1167,17 @@ export default grammar({
       );
     },
 
-    identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
+    identifier: ($) =>
+      choice(
+        $._identifier,
+        seq(
+          $.special_identifier_start,
+          repeat1($.special_identifier_content),
+          $.special_identifier_end
+        )
+      ),
+
+    _identifier: (_) => /[a-zA-Z_][a-zA-Z0-9_]*/,
 
     keyword_identifier: ($) =>
       choice(
@@ -1180,6 +1194,7 @@ export default grammar({
     line_continuation: (_) =>
       token(seq("\\", choice(seq(optional("\r"), "\n"), "\0"))),
 
+    infer_only_marker: (_) => "//",
     positional_separator: (_) => "/",
     keyword_separator: (_) => "*",
   },
