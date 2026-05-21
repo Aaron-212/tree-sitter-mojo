@@ -2,10 +2,10 @@
 name = "tree-sitter-mojo"
 description = "Tree-Sitter of Mojolang"
 version = "0.1.0"
-authors = ["Aaron212 <i@ar212.com>"]
+authors = ["Aaron Ruan <i@ar212.com>"]
 license = "MIT"
 readme = "README.md"
-keywords = ["incremental", "parsing", "tree-sitter", "mojo"]
+keywords = ["incremental", "mojo", "parsing", "tree-sitter"]
 categories = ["parser-implementations", "parsing", "text-editors"]
 repository = "https://github.com/aaron-212/tree-sitter-mojo"
 edition = "2021"
@@ -13,12 +13,12 @@ autoexamples = false
 
 build = "bindings/rust/build.rs"
 include = [
+  "/LICENSE",
   "bindings/rust/*",
   "grammar.js",
   "queries/*",
   "src/*",
   "tree-sitter.json",
-  "/LICENSE",
 ]
 
 [lib]
@@ -27,8 +27,8 @@ path = "bindings/rust/lib.rs"
 [dependencies]
 tree-sitter-language = "0.1"
 
-[build-dependencies]
-cc = "1.2"
-
 [dev-dependencies]
 tree-sitter = "0.26.9"
+
+[build-dependencies]
+cc = "1.2"

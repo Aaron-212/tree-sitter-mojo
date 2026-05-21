@@ -6,10 +6,7 @@
       "camelcase": "Mojo",
       "title": "Mojo",
       "scope": "source.mojo",
-      "file-types": [
-        "mojo,",
-        "🔥"
-      ],
+      "file-types": ["mojo,", "🔥"],
       "injection-regex": "^mojo$",
       "class-name": "TreeSitterMojo"
     }
@@ -20,7 +17,7 @@
     "description": "Tree-Sitter of Mojolang",
     "authors": [
       {
-        "name": "Aaron212",
+        "name": "Aaron Ruan",
         "email": "i@ar212.com",
         "url": "https://ar212.com"
       }

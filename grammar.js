@@ -7,7 +7,7 @@
 /// <reference types="tree-sitter-cli/dsl" />
 // @ts-check
 
-const PREC = {
+export const PREC = {
   // this resolves a conflict between the usage of ':' in a lambda vs in a
   // typed parameter. In the case of a lambda, we don't allow typed parameters.
   lambda: -2,
@@ -29,7 +29,6 @@ const PREC = {
   unary: 20,
   power: 21,
   call: 22,
-  type_constraint: 23,
 };
 
 const SEMICOLON = ";";
@@ -1197,8 +1196,6 @@ export default grammar({
     keyword_separator: (_) => "*",
   },
 });
-
-module.exports.PREC = PREC;
 
 /**
  * Creates a rule to match one or more of the rules separated by a comma

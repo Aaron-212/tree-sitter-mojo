@@ -1,16 +1,17 @@
 {
   "name": "tree-sitter-mojo",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "version": "0.1.0",
+  "type": "module",
+  "description": "Tree-Sitter for Mojolang",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "tree-sitter test"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
-  "devDependencies": {
-    "tree-sitter-cli": "^0.26.8"
-  }
+  "keywords": [
+    "incremental",
+    "mojo",
+    "parsing",
+    "tree-sitter"
+  ],
+  "author": "Aaron Ruan <i@ar212.com>",
+  "license": "MIT"
 }
