@@ -3,7 +3,17 @@ name: Test Tree-sitter Grammar
 on:
   push:
     branches: main
+    paths:
+      - 'test/**' 
+      - 'src/**'
+      - 'grammar.js'
+
   pull_request:
+    branches: main
+    paths:
+      - 'test/**' 
+      - 'src/**'
+      - 'grammar.js'
 
 jobs:
   test:
