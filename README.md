@@ -1,5 +1,7 @@
 # tree-sitter-mojo
 
+[![Test Tree-sitter Grammar](https://github.com/Aaron-212/tree-sitter-mojo/actions/workflows/test.yml/badge.svg)](https://github.com/Aaron-212/tree-sitter-mojo/actions/workflows/test.yml)
+
 Mojo grammar for [tree-sitter](https://tree-sitter.github.io/).
 
 The current implementation is based on the nightly version of [Mojo language reference](https://mojolang.org/nightly/docs/reference/), and may not cover all features of the language. Contributions are welcome!
