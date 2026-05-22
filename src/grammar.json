@@ -1533,13 +1533,8 @@
       }
     },
     "effects": {
-      "type": "CHOICE",
-      "members": [
-        {
-          "type": "STRING",
-          "value": "register_passable"
-        }
-      ]
+      "type": "STRING",
+      "value": "register_passable"
     },
     "argument_list": {
       "type": "SEQ",
@@ -6643,111 +6638,7 @@
     "global": [
       {
         "type": "STRING",
-        "value": "False"
-      },
-      {
-        "type": "STRING",
-        "value": "else"
-      },
-      {
-        "type": "STRING",
-        "value": "import"
-      },
-      {
-        "type": "STRING",
-        "value": "pass"
-      },
-      {
-        "type": "STRING",
-        "value": "None"
-      },
-      {
-        "type": "STRING",
-        "value": "break"
-      },
-      {
-        "type": "STRING",
-        "value": "except"
-      },
-      {
-        "type": "STRING",
-        "value": "in"
-      },
-      {
-        "type": "STRING",
-        "value": "raise"
-      },
-      {
-        "type": "STRING",
-        "value": "raises"
-      },
-      {
-        "type": "STRING",
-        "value": "True"
-      },
-      {
-        "type": "STRING",
-        "value": "struct"
-      },
-      {
-        "type": "STRING",
-        "value": "finally"
-      },
-      {
-        "type": "STRING",
-        "value": "is"
-      },
-      {
-        "type": "STRING",
-        "value": "return"
-      },
-      {
-        "type": "STRING",
-        "value": "and"
-      },
-      {
-        "type": "STRING",
-        "value": "continue"
-      },
-      {
-        "type": "STRING",
-        "value": "for"
-      },
-      {
-        "type": "STRING",
-        "value": "try"
-      },
-      {
-        "type": "STRING",
-        "value": "as"
-      },
-      {
-        "type": "STRING",
-        "value": "def"
-      },
-      {
-        "type": "STRING",
-        "value": "from"
-      },
-      {
-        "type": "STRING",
-        "value": "while"
-      },
-      {
-        "type": "STRING",
-        "value": "assert"
-      },
-      {
-        "type": "STRING",
-        "value": "del"
-      },
-      {
-        "type": "STRING",
-        "value": "not"
-      },
-      {
-        "type": "STRING",
-        "value": "with"
+        "value": "if"
       },
       {
         "type": "STRING",
@@ -6755,31 +6646,63 @@
       },
       {
         "type": "STRING",
-        "value": "if"
+        "value": "else"
       },
       {
         "type": "STRING",
-        "value": "or"
+        "value": "for"
       },
       {
         "type": "STRING",
-        "value": "yield"
+        "value": "while"
       },
       {
         "type": "STRING",
-        "value": "comptime"
+        "value": "break"
       },
       {
         "type": "STRING",
-        "value": "self"
+        "value": "continue"
       },
       {
         "type": "STRING",
-        "value": "Self"
+        "value": "pass"
       },
       {
         "type": "STRING",
-        "value": "var"
+        "value": "return"
+      },
+      {
+        "type": "STRING",
+        "value": "with"
+      },
+      {
+        "type": "STRING",
+        "value": "try"
+      },
+      {
+        "type": "STRING",
+        "value": "except"
+      },
+      {
+        "type": "STRING",
+        "value": "finally"
+      },
+      {
+        "type": "STRING",
+        "value": "raise"
+      },
+      {
+        "type": "STRING",
+        "value": "assert"
+      },
+      {
+        "type": "STRING",
+        "value": "def"
+      },
+      {
+        "type": "STRING",
+        "value": "struct"
       },
       {
         "type": "STRING",
@@ -6787,23 +6710,63 @@
       },
       {
         "type": "STRING",
-        "value": "match"
+        "value": "var"
       },
       {
         "type": "STRING",
-        "value": "case"
+        "value": "ref"
       },
       {
         "type": "STRING",
-        "value": "exec"
+        "value": "and"
       },
       {
         "type": "STRING",
-        "value": "type"
+        "value": "or"
       },
       {
         "type": "STRING",
-        "value": "lambda"
+        "value": "not"
+      },
+      {
+        "type": "STRING",
+        "value": "in"
+      },
+      {
+        "type": "STRING",
+        "value": "is"
+      },
+      {
+        "type": "STRING",
+        "value": "import"
+      },
+      {
+        "type": "STRING",
+        "value": "from"
+      },
+      {
+        "type": "STRING",
+        "value": "as"
+      },
+      {
+        "type": "STRING",
+        "value": "comptime"
+      },
+      {
+        "type": "STRING",
+        "value": "True"
+      },
+      {
+        "type": "STRING",
+        "value": "False"
+      },
+      {
+        "type": "STRING",
+        "value": "None"
+      },
+      {
+        "type": "STRING",
+        "value": "Self"
       },
       {
         "type": "STRING",
@@ -6816,22 +6779,6 @@
       {
         "type": "STRING",
         "value": "deinit"
-      },
-      {
-        "type": "STRING",
-        "value": "ref"
-      },
-      {
-        "type": "STRING",
-        "value": "register_passable"
-      },
-      {
-        "type": "STRING",
-        "value": "thin"
-      },
-      {
-        "type": "STRING",
-        "value": "abi"
       }
     ]
   }
