@@ -74,19 +74,11 @@
         "named": true
       },
       {
-        "type": "global_statement",
-        "named": true
-      },
-      {
         "type": "import_from_statement",
         "named": true
       },
       {
         "type": "import_statement",
-        "named": true
-      },
-      {
-        "type": "nonlocal_statement",
         "named": true
       },
       {
@@ -1932,21 +1924,6 @@
     }
   },
   {
-    "type": "global_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "identifier",
     "named": true,
     "fields": {},
@@ -2513,21 +2490,6 @@
           }
         ]
       }
-    }
-  },
-  {
-    "type": "nonlocal_statement",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        }
-      ]
     }
   },
   {
@@ -3818,10 +3780,6 @@
     "named": false
   },
   {
-    "type": "global",
-    "named": false
-  },
-  {
     "type": "if",
     "named": false
   },
@@ -3861,10 +3819,6 @@
   {
     "type": "none",
     "named": true
-  },
-  {
-    "type": "nonlocal",
-    "named": false
   },
   {
     "type": "not",
