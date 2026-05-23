@@ -4,7 +4,7 @@
 
 Mojo grammar for [tree-sitter](https://tree-sitter.github.io/).
 
-The current implementation is based on the nightly version of [Mojo language reference](https://mojolang.org/nightly/docs/reference/), and may not cover all features of the language. Contributions are welcome!
+The current implementation is based on the 1.0.0b1 version of [Mojo language reference](https://mojolang.org/docs/reference/), and may not cover all features of the language. Contributions are welcome!
 
 ## Todo
 
@@ -12,9 +12,9 @@ The current implementation is based on the nightly version of [Mojo language ref
 - Figure out the order of function effects (like `register_passable`) and `raises` clause in function definitions
 - Figure out if there's more function effects
 - `where` clause in trait of a struct definitions (new in nightly)
-- MLIR special attributes. They are currently considered as escaped identifiers becuasse they are wrapped by ` `` `.
+- MLIR special attributes. They are currently considered as escaped identifiers becuasse they are wrapped by ``` `` ```.
 
 ## References
 
 - tree-sitter-python: <https://github.com/tree-sitter/tree-sitter-python>
-- Mojo language reference: <https://mojolang.org/nightly/docs/reference/>
+- Mojo language reference: <https://mojolang.org/docs/reference/>
