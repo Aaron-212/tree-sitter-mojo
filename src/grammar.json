@@ -1475,7 +1475,7 @@
                   "name": "return_type",
                   "content": {
                     "type": "SYMBOL",
-                    "name": "type"
+                    "name": "_return_type"
                   }
                 }
               ]
@@ -1531,6 +1531,36 @@
     "effects": {
       "type": "STRING",
       "value": "register_passable"
+    },
+    "_return_type": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "type"
+        },
+        {
+          "type": "SEQ",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "type"
+            },
+            {
+              "type": "STRING",
+              "value": "where"
+            },
+            {
+              "type": "FIELD",
+              "name": "constraint",
+              "content": {
+                "type": "SYMBOL",
+                "name": "expression"
+              }
+            }
+          ]
+        }
+      ]
     },
     "argument_list": {
       "type": "SEQ",
@@ -3005,21 +3035,8 @@
           "type": "CHOICE",
           "members": [
             {
-              "type": "CHOICE",
-              "members": [
-                {
-                  "type": "STRING",
-                  "value": "mut"
-                },
-                {
-                  "type": "STRING",
-                  "value": "out"
-                },
-                {
-                  "type": "STRING",
-                  "value": "deinit"
-                }
-              ]
+              "type": "SYMBOL",
+              "name": "_argument_convetions"
             },
             {
               "type": "BLANK"
@@ -4875,6 +4892,31 @@
         ]
       }
     },
+    "_argument_convetions": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "STRING",
+          "value": "mut"
+        },
+        {
+          "type": "STRING",
+          "value": "var"
+        },
+        {
+          "type": "STRING",
+          "value": "out"
+        },
+        {
+          "type": "STRING",
+          "value": "deinit"
+        },
+        {
+          "type": "STRING",
+          "value": "ref"
+        }
+      ]
+    },
     "typed_argument": {
       "type": "PREC",
       "value": -1,
@@ -4885,29 +4927,8 @@
             "type": "CHOICE",
             "members": [
               {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "STRING",
-                    "value": "mut"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "var"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "out"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "deinit"
-                  },
-                  {
-                    "type": "STRING",
-                    "value": "ref"
-                  }
-                ]
+                "type": "SYMBOL",
+                "name": "_argument_convetions"
               },
               {
                 "type": "BLANK"
@@ -6477,6 +6498,10 @@
     [
       "pattern",
       "type"
+    ],
+    [
+      "_return_type",
+      "constrained_type"
     ]
   ],
   "precedences": [],

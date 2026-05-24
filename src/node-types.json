@@ -1767,6 +1767,16 @@
           }
         ]
       },
+      "constraint": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "expression",
+            "named": true
+          }
+        ]
+      },
       "effects": {
         "multiple": false,
         "required": false,
@@ -1798,12 +1808,20 @@
         ]
       },
       "return_type": {
-        "multiple": false,
+        "multiple": true,
         "required": false,
         "types": [
           {
+            "type": "expression",
+            "named": true
+          },
+          {
             "type": "type",
             "named": true
+          },
+          {
+            "type": "where",
+            "named": false
           }
         ]
       },
@@ -3870,6 +3888,10 @@
   },
   {
     "type": "var",
+    "named": false
+  },
+  {
+    "type": "where",
     "named": false
   },
   {

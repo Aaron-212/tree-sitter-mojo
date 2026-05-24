@@ -56,6 +56,7 @@ export default grammar({
     [$.call_argument_list, $._collection_elements],
     [$.primary_expression, $.type],
     [$.pattern, $.type],
+    [$._return_type, $.constrained_type],
   ],
 
   supertypes: ($) => [
@@ -379,13 +380,15 @@ export default grammar({
         // TODO: Which one comes first in place, raises or effects
         field("raises_clause", optional($.raises_clause)),
         field("effects", optional($.effects)),
-        optional(seq("->", field("return_type", $.type))),
+        optional(seq("->", field("return_type", $._return_type))),
         ":",
         field("body", $._suite)
       ),
     raises_clause: ($) =>
       prec.left(seq("raises", optional(field("error_type", $.type)))),
     effects: (_) => "register_passable", // TODO: Add more function effects
+    _return_type: ($) =>
+      choice($.type, seq($.type, "where", field("constraint", $.expression))),
 
     argument_list: ($) => seq("(", optional($._arguments), ")"),
 
@@ -616,7 +619,7 @@ export default grammar({
 
     list_pattern: ($) => seq("[", optional($._patterns), "]"),
 
-    self_argument: ($) => seq(optional(choice("mut", "out", "deinit")), "self"),
+    self_argument: ($) => seq(optional($._argument_convetions), "self"),
 
     default_argument: ($) =>
       seq(
@@ -972,11 +975,13 @@ export default grammar({
         )
       ),
 
+    _argument_convetions: (_) => choice("mut", "var", "out", "deinit", "ref"),
+
     typed_argument: ($) =>
       prec(
         PREC.typed_argument,
         seq(
-          optional(choice("mut", "var", "out", "deinit", "ref")),
+          optional($._argument_convetions),
           choice(
             $.identifier,
             $.list_splat_pattern,
