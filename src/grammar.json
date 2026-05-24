@@ -3297,6 +3297,10 @@
         },
         {
           "type": "SYMBOL",
+          "name": "self"
+        },
+        {
+          "type": "SYMBOL",
           "name": "unary_operator"
         },
         {
@@ -4616,7 +4620,7 @@
       }
     },
     "subscript": {
-      "type": "PREC",
+      "type": "PREC_LEFT",
       "value": 22,
       "content": {
         "type": "SEQ",
@@ -4625,8 +4629,17 @@
             "type": "FIELD",
             "name": "value",
             "content": {
-              "type": "SYMBOL",
-              "name": "primary_expression"
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "primary_expression"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "identifier"
+                }
+              ]
             }
           },
           {
@@ -4771,7 +4784,7 @@
     },
     "call": {
       "type": "PREC",
-      "value": 22,
+      "value": 23,
       "content": {
         "type": "SEQ",
         "members": [
@@ -4937,14 +4950,6 @@
       "type": "CHOICE",
       "members": [
         {
-          "type": "PREC",
-          "value": 1,
-          "content": {
-            "type": "SYMBOL",
-            "name": "expression"
-          }
-        },
-        {
           "type": "SYMBOL",
           "name": "splat_type"
         },
@@ -4954,15 +4959,47 @@
         },
         {
           "type": "SYMBOL",
-          "name": "union_type"
-        },
-        {
-          "type": "SYMBOL",
           "name": "constrained_type"
         },
         {
           "type": "SYMBOL",
-          "name": "member_type"
+          "name": "function_pointer_type"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "binary_operator"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "attribute"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "identifier"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "integer"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "float"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "string"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "true"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "false"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "none"
         },
         {
           "type": "SYMBOL",
@@ -4970,7 +5007,11 @@
         },
         {
           "type": "SYMBOL",
-          "name": "function_pointer_type"
+          "name": "tuple"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "parenthesized_expression"
         }
       ]
     },
@@ -5002,7 +5043,7 @@
     },
     "generic_type": {
       "type": "PREC",
-      "value": 1,
+      "value": 2,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5033,7 +5074,7 @@
     },
     "union_type": {
       "type": "PREC_LEFT",
-      "value": 0,
+      "value": -1,
       "content": {
         "type": "SEQ",
         "members": [
@@ -5086,21 +5127,25 @@
       }
     },
     "member_type": {
-      "type": "SEQ",
-      "members": [
-        {
-          "type": "SYMBOL",
-          "name": "type"
-        },
-        {
-          "type": "STRING",
-          "value": "."
-        },
-        {
-          "type": "SYMBOL",
-          "name": "identifier"
-        }
-      ]
+      "type": "PREC",
+      "value": -1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "type"
+          },
+          {
+            "type": "STRING",
+            "value": "."
+          },
+          {
+            "type": "SYMBOL",
+            "name": "identifier"
+          }
+        ]
+      }
     },
     "function_pointer_type": {
       "type": "PREC_LEFT",
@@ -6507,6 +6552,14 @@
     [
       "call_argument_list",
       "_collection_elements"
+    ],
+    [
+      "primary_expression",
+      "type"
+    ],
+    [
+      "pattern",
+      "type"
     ]
   ],
   "precedences": [],

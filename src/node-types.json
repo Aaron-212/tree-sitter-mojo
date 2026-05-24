@@ -312,6 +312,10 @@
         "named": true
       },
       {
+        "type": "self",
+        "named": true
+      },
+      {
         "type": "set",
         "named": true
       },
@@ -2424,25 +2428,6 @@
     }
   },
   {
-    "type": "member_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "identifier",
-          "named": true
-        },
-        {
-          "type": "type",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
     "type": "module",
     "named": true,
     "root": true,
@@ -3123,11 +3108,23 @@
       "required": true,
       "types": [
         {
+          "type": "attribute",
+          "named": true
+        },
+        {
+          "type": "binary_operator",
+          "named": true
+        },
+        {
           "type": "constrained_type",
           "named": true
         },
         {
-          "type": "expression",
+          "type": "false",
+          "named": true
+        },
+        {
+          "type": "float",
           "named": true
         },
         {
@@ -3139,7 +3136,19 @@
           "named": true
         },
         {
-          "type": "member_type",
+          "type": "identifier",
+          "named": true
+        },
+        {
+          "type": "integer",
+          "named": true
+        },
+        {
+          "type": "none",
+          "named": true
+        },
+        {
+          "type": "parenthesized_expression",
           "named": true
         },
         {
@@ -3151,7 +3160,15 @@
           "named": true
         },
         {
-          "type": "union_type",
+          "type": "string",
+          "named": true
+        },
+        {
+          "type": "true",
+          "named": true
+        },
+        {
+          "type": "tuple",
           "named": true
         }
       ]
@@ -3327,21 +3344,6 @@
         },
         {
           "type": "union_pattern",
-          "named": true
-        }
-      ]
-    }
-  },
-  {
-    "type": "union_type",
-    "named": true,
-    "fields": {},
-    "children": {
-      "multiple": true,
-      "required": true,
-      "types": [
-        {
-          "type": "type",
           "named": true
         }
       ]

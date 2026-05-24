@@ -35,10 +35,9 @@ trait Boxable:
         argument_list: (argument_list
           (self_argument))
         return_type: (type
-          (member_type
-            (type
-              (self))
-            (identifier)))
+          (attribute
+            object: (self)
+            attribute: (identifier)))
         body: (block
           (ellipsis)))
       (decorated_definition

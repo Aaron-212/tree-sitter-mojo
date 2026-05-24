@@ -54,6 +54,8 @@ export default grammar({
     [$.call_argument_list, $.tuple],
     [$.call_argument_list, $.tuple_pattern],
     [$.call_argument_list, $._collection_elements],
+    [$.primary_expression, $.type],
+    [$.pattern, $.type],
   ],
 
   supertypes: ($) => [
@@ -687,6 +689,7 @@ export default grammar({
         $.true,
         $.false,
         $.none,
+        $.self,
         $.unary_operator,
         $.transfer_operator,
         $.attribute,
@@ -924,10 +927,10 @@ export default grammar({
       ),
 
     subscript: ($) =>
-      prec(
+      prec.left(
         PREC.call,
         seq(
-          field("value", $.primary_expression),
+          field("value", choice($.primary_expression, $.identifier)),
           "[",
           commaSep1(field("subscript", choice($.expression, $.slice))),
           optional(","),
@@ -947,7 +950,7 @@ export default grammar({
 
     call: ($) =>
       prec(
-        PREC.call,
+        PREC.call + 1,
         seq(
           field("function", choice($.identifier, $.attribute, $.self)),
           field("type_constraint", optional($.parameter_list)),
@@ -986,25 +989,33 @@ export default grammar({
 
     type: ($) =>
       choice(
-        prec(1, $.expression),
         $.splat_type,
         $.generic_type,
-        $.union_type,
         $.constrained_type,
-        $.member_type,
+        $.function_pointer_type,
+        $.binary_operator,
+        $.attribute,
+        $.identifier,
+        $.integer,
+        $.float,
+        $.string,
+        $.true,
+        $.false,
+        $.none,
         $.self,
-        $.function_pointer_type
+        $.tuple,
+        $.parenthesized_expression
       ),
     splat_type: ($) => prec(1, seq(choice("*", "**"), $.identifier)),
     generic_type: ($) =>
       prec(
-        1,
+        2,
         seq(choice($.identifier, alias("type", $.identifier)), $.parameter_list)
       ),
-    union_type: ($) => prec.left(seq($.type, "&", $.type)),
+    union_type: ($) => prec.left(-1, seq($.type, "&", $.type)),
     constrained_type: ($) =>
       prec.right(seq(optional("var"), $.type, ":", $.type)),
-    member_type: ($) => seq($.type, ".", $.identifier),
+    member_type: ($) => prec(-1, seq($.type, ".", $.identifier)),
     function_pointer_type: ($) =>
       prec.left(
         seq(

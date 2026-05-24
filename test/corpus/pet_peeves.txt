@@ -1,0 +1,17 @@
+============
+Pet Peeves 1
+============
+
+SIMD[DType.int16, 1].MIN
+
+---
+
+(module
+  (attribute
+    object: (subscript
+      value: (identifier)
+      subscript: (attribute
+        object: (identifier)
+        attribute: (identifier))
+      subscript: (integer))
+    attribute: (identifier)))
