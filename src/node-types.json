@@ -827,7 +827,7 @@
             "named": true
           },
           {
-            "type": "self_type",
+            "type": "self",
             "named": true
           }
         ]
@@ -3143,7 +3143,7 @@
           "named": true
         },
         {
-          "type": "self_type",
+          "type": "self",
           "named": true
         },
         {
@@ -3831,7 +3831,7 @@
     "named": false
   },
   {
-    "type": "self_type",
+    "type": "self",
     "named": true
   },
   {

@@ -37,7 +37,7 @@ trait Boxable:
         return_type: (type
           (member_type
             (type
-              (self_type))
+              (self))
             (identifier)))
         body: (block
           (ellipsis)))

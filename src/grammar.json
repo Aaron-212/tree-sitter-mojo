@@ -4791,7 +4791,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "self_type"
+                  "name": "self"
                 }
               ]
             }
@@ -4966,7 +4966,7 @@
         },
         {
           "type": "SYMBOL",
-          "name": "self_type"
+          "name": "self"
         },
         {
           "type": "SYMBOL",
@@ -5101,10 +5101,6 @@
           "name": "identifier"
         }
       ]
-    },
-    "self_type": {
-      "type": "STRING",
-      "value": "Self"
     },
     "function_pointer_type": {
       "type": "PREC_LEFT",
@@ -5865,10 +5861,6 @@
         }
       }
     },
-    "self_literal": {
-      "type": "STRING",
-      "value": "self"
-    },
     "interpolation": {
       "type": "SEQ",
       "members": [
@@ -6385,6 +6377,10 @@
     "none": {
       "type": "STRING",
       "value": "None"
+    },
+    "self": {
+      "type": "STRING",
+      "value": "Self"
     },
     "comment": {
       "type": "TOKEN",

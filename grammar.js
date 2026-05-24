@@ -949,7 +949,7 @@ export default grammar({
       prec(
         PREC.call,
         seq(
-          field("function", choice($.identifier, $.attribute, $.self_type)),
+          field("function", choice($.identifier, $.attribute, $.self)),
           field("type_constraint", optional($.parameter_list)),
           field(
             "arguments",
@@ -992,7 +992,7 @@ export default grammar({
         $.union_type,
         $.constrained_type,
         $.member_type,
-        $.self_type,
+        $.self,
         $.function_pointer_type
       ),
     splat_type: ($) => prec(1, seq(choice("*", "**"), $.identifier)),
@@ -1005,7 +1005,6 @@ export default grammar({
     constrained_type: ($) =>
       prec.right(seq(optional("var"), $.type, ":", $.type)),
     member_type: ($) => seq($.type, ".", $.identifier),
-    self_type: (_) => "Self",
     function_pointer_type: ($) =>
       prec.left(
         seq(
@@ -1127,8 +1126,6 @@ export default grammar({
         )
       ),
 
-    self_literal: (_) => "self",
-
     interpolation: ($) =>
       seq(
         "{",
@@ -1223,6 +1220,7 @@ export default grammar({
     true: (_) => "True",
     false: (_) => "False",
     none: (_) => "None",
+    self: (_) => "Self",
 
     comment: (_) => token(seq("#", /.*/)),
 

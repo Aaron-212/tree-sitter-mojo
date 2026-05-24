@@ -293,11 +293,11 @@ struct Point:
         name: (identifier)
         argument_list: (argument_list)
         return_type: (type
-          (self_type))
+          (self))
         body: (block
           (return_statement
             (call
-              function: (self_type)
+              function: (self)
               arguments: (call_argument_list
                 (float)
                 (float))))))
