@@ -10,9 +10,12 @@ Integer
 1_000_000
 1__000_
 
+0
+
 ---
 
 (module
+  (integer)
   (integer)
   (integer)
   (integer)

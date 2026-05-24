@@ -1187,10 +1187,10 @@ export default grammar({
     integer: (_) =>
       token(
         choice(
-          seq(choice("0x", "0X"), repeat1(/_?[A-Fa-f0-9]+/)),
-          seq(choice("0o", "0O"), repeat1(/_?[0-7]+/)),
-          seq(choice("0b", "0B"), repeat1(/_?[0-1]+/)),
-          repeat1(/[0-9]+_*/)
+          /0[xX][_0-9a-fA-F]+/,
+          /0[oO][_0-7]+/,
+          /0[bB][_01]+/,
+          /[0-9][_0-9]*/
         )
       ),
 
@@ -1199,13 +1199,10 @@ export default grammar({
       const exponent = seq(/[eE][\+-]?/, digits);
 
       return token(
-        seq(
-          choice(
-            seq(digits, ".", optional(digits), optional(exponent)),
-            seq(optional(digits), ".", digits, optional(exponent)),
-            seq(digits, exponent)
-          ),
-          optional(/[jJ]/)
+        choice(
+          seq(digits, ".", optional(digits), optional(exponent)),
+          seq(optional(digits), ".", digits, optional(exponent)),
+          seq(digits, exponent)
         )
       );
     },
