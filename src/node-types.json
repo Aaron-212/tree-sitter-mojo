@@ -92,10 +92,6 @@
       {
         "type": "return_statement",
         "named": true
-      },
-      {
-        "type": "type_alias_statement",
-        "named": true
       }
     ]
   },
@@ -3162,32 +3158,6 @@
     }
   },
   {
-    "type": "type_alias_statement",
-    "named": true,
-    "fields": {
-      "left": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      },
-      "right": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "typed_argument",
     "named": true,
     "fields": {
@@ -3890,10 +3860,6 @@
   },
   {
     "type": "try",
-    "named": false
-  },
-  {
-    "type": "type",
     "named": false
   },
   {

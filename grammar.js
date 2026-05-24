@@ -50,7 +50,6 @@ export default grammar({
     [$.list, $.list_pattern],
     [$.with_item, $._collection_elements],
     [$.named_expression, $.as_pattern],
-    [$.type_alias_statement, $.primary_expression],
     [$.match_statement, $.primary_expression],
     [$.call_argument_list, $.tuple],
     [$.call_argument_list, $.tuple_pattern],
@@ -172,8 +171,7 @@ export default grammar({
         $.pass_statement,
         $.break_statement,
         $.continue_statement,
-        $.exec_statement,
-        $.type_alias_statement
+        $.exec_statement
       ),
 
     import_statement: ($) => seq("import", $._import_list),
@@ -404,12 +402,6 @@ export default grammar({
         "exec",
         field("code", choice($.string, $.identifier)),
         optional(seq("in", commaSep1($.expression)))
-      ),
-
-    type_alias_statement: ($) =>
-      prec.dynamic(
-        1,
-        seq("type", field("left", $.type), "=", field("right", $.type))
       ),
 
     struct_definition: ($) =>
