@@ -72,7 +72,7 @@ def map[
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (parameter_list
+    parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -90,7 +90,7 @@ def map[
         (identifier)
         type: (type
           (function_pointer_type
-            argument_list: (function_pointer_arguments
+            argument_list: (function_pointer_argument_list
               (type
                 (identifier)))
             return_type: (type
@@ -127,10 +127,10 @@ var sqrt = lib.get_function[def(Float64) thin abi("C") -> Float64]("sqrt")
       function: (attribute
         object: (identifier)
         attribute: (identifier))
-      type_constraint: (parameter_list
+      parameters: (parameter_list
         (type
           (function_pointer_type
-            argument_list: (function_pointer_arguments
+            argument_list: (function_pointer_argument_list
               (type
                 (identifier)))
             (string
@@ -160,14 +160,14 @@ def double(x: Int) register_passable -> Int:
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (parameter_list
+    parameters: (parameter_list
       (type
         (constrained_type
           (type
             (identifier))
           (type
             (function_pointer_type
-              argument_list: (function_pointer_arguments
+              argument_list: (function_pointer_argument_list
                 (type
                   (identifier)))
               return_type: (type

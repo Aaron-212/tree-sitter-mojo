@@ -94,7 +94,7 @@ struct Name[T: Writable & Copyable & ImplicitlyDestructible](TraitA, TraitB):
 (module
   (struct_definition
     name: (identifier)
-    type_parameters: (parameter_list
+    parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -116,7 +116,7 @@ struct Name[T: Writable & Copyable & ImplicitlyDestructible](TraitA, TraitB):
       (pass_statement)))
   (struct_definition
     name: (identifier)
-    type_parameters: (parameter_list
+    parameters: (parameter_list
       (type
         (constrained_type
           (type

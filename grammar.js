@@ -10,7 +10,7 @@
 export const PREC = {
   // this resolves a conflict between the usage of ':' in a lambda vs in a
   // typed value argument. In the case of a lambda, we don't allow typed value
-  // argument_list.
+  // runtime arguments.
   lambda: -2,
   typed_argument: -1,
   conditional: -1,
@@ -208,10 +208,10 @@ export default grammar({
 
     expression_statement: ($) =>
       choice(
-        $.expression,
-        $.tuple_expression,
         $.assignment,
         $.augmented_assignment,
+        $.expression,
+        $.tuple_expression,
         $.yield
       ),
 
@@ -375,7 +375,7 @@ export default grammar({
       seq(
         "def",
         field("name", $.identifier),
-        field("type_parameters", optional($.parameter_list)),
+        field("parameters", optional($.parameter_list)),
         field("argument_list", $.argument_list),
         // TODO: Which one comes first in place, raises or effects
         field("raises_clause", optional($.raises_clause)),
@@ -390,9 +390,9 @@ export default grammar({
     _return_type: ($) =>
       choice($.type, seq($.type, "where", field("constraint", $.expression))),
 
-    argument_list: ($) => seq("(", optional($._arguments), ")"),
+    argument_list: ($) => seq("(", optional($._argument_list), ")"),
 
-    lambda_arguments: ($) => $._arguments,
+    lambda_argument_list: ($) => $._argument_list,
 
     list_splat: ($) => seq("*", $.expression),
 
@@ -413,7 +413,7 @@ export default grammar({
       seq(
         "struct",
         field("name", $.identifier),
-        field("type_parameters", optional($.parameter_list)),
+        field("parameters", optional($.parameter_list)),
         field("traits", optional($.call_argument_list)),
         ":",
         field("body", $._suite)
@@ -422,7 +422,7 @@ export default grammar({
       seq(
         "[",
         commaSep1(
-          choice($.type, $.infer_only_marker, seq($.type, "=", $.type))
+          choice($.type, $.infer_only_marker, $.keyword_parameter)
         ),
         optional(","),
         "]"
@@ -586,7 +586,7 @@ export default grammar({
 
     // Patterns
 
-    _arguments: ($) => seq(commaSep1($.argument), optional(",")),
+    _argument_list: ($) => seq(commaSep1($.argument), optional(",")),
 
     _patterns: ($) => seq(commaSep1($.pattern), optional(",")),
 
@@ -821,7 +821,7 @@ export default grammar({
         PREC.lambda,
         seq(
           "lambda",
-          field("argument_list", optional($.lambda_arguments)),
+          field("argument_list", optional($.lambda_argument_list)),
           ":",
           field("body", $.expression)
         )
@@ -830,7 +830,7 @@ export default grammar({
     lambda_within_for_in_clause: ($) =>
       seq(
         "lambda",
-        field("argument_list", optional($.lambda_arguments)),
+        field("argument_list", optional($.lambda_argument_list)),
         ":",
         field("body", $._expression_within_for_in_clause)
       ),
@@ -905,7 +905,6 @@ export default grammar({
         $.expression_list,
         $.assignment,
         $.augmented_assignment,
-        $.pattern_list,
         $.yield
       ),
     _comptime_right_hand_side: ($) =>
@@ -956,7 +955,7 @@ export default grammar({
         PREC.call + 1,
         seq(
           field("function", choice($.identifier, $.attribute, $.self)),
-          field("type_constraint", optional($.parameter_list)),
+          field("parameters", optional($.parameter_list)),
           field(
             "arguments",
             choice($.generator_expression, $.call_argument_list)
@@ -1025,13 +1024,13 @@ export default grammar({
       prec.left(
         seq(
           "def",
-          field("argument_list", $.function_pointer_arguments),
+          field("argument_list", $.function_pointer_argument_list),
           repeat($._function_pointer_effect),
           "->",
           field("return_type", $.type)
         )
       ),
-    function_pointer_arguments: ($) =>
+    function_pointer_argument_list: ($) =>
       seq("(", optional(seq(commaSep1($.type), optional(","))), ")"),
     _function_pointer_effect: ($) =>
       choice(
@@ -1048,6 +1047,9 @@ export default grammar({
         "=",
         field("value", $.expression)
       ),
+
+    keyword_parameter: ($) =>
+      seq(field("name", $.type), "=", field("value", $.type)),
 
     // Literals
 

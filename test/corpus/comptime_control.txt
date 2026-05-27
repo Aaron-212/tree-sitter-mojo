@@ -14,7 +14,7 @@ else:
     condition: (comparison_operator
       (call
         function: (identifier)
-        type_constraint: (parameter_list
+        parameters: (parameter_list
           (type
             (identifier)))
         arguments: (call_argument_list))

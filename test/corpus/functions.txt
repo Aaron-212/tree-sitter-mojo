@@ -66,7 +66,7 @@ def clamp[T: Comparable & ImplicitlyCopyable](
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (parameter_list
+    parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -126,7 +126,7 @@ def main():
 (module
   (function_definition
     name: (identifier)
-    type_parameters: (parameter_list
+    parameters: (parameter_list
       (type
         (constrained_type
           (type
@@ -152,7 +152,7 @@ def main():
             (interpolation
               expression: (call
                 function: (identifier)
-                type_constraint: (parameter_list
+                parameters: (parameter_list
                   (type
                     (identifier)))
                 arguments: (call_argument_list)))
@@ -175,11 +175,12 @@ def main():
             (string_end))))
       (call
         function: (identifier)
-        type_constraint: (parameter_list
-          (type
-            (identifier))
-          (type
-            (identifier)))
+        parameters: (parameter_list
+          (keyword_parameter
+            name: (type
+              (identifier))
+            value: (type
+              (identifier))))
         arguments: (call_argument_list
           (integer))))))
 

@@ -478,10 +478,6 @@
             "named": true
           },
           {
-            "type": "pattern_list",
-            "named": true
-          },
-          {
             "type": "type",
             "named": true
           },
@@ -627,10 +623,6 @@
           },
           {
             "type": "expression_list",
-            "named": true
-          },
-          {
-            "type": "pattern_list",
             "named": true
           },
           {
@@ -836,7 +828,7 @@
           }
         ]
       },
-      "type_constraint": {
+      "parameters": {
         "multiple": false,
         "required": false,
         "types": [
@@ -1797,6 +1789,16 @@
           }
         ]
       },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
       "raises_clause": {
         "multiple": false,
         "required": false,
@@ -1824,21 +1826,11 @@
             "named": false
           }
         ]
-      },
-      "type_parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "parameter_list",
-            "named": true
-          }
-        ]
       }
     }
   },
   {
-    "type": "function_pointer_arguments",
+    "type": "function_pointer_argument_list",
     "named": true,
     "fields": {},
     "children": {
@@ -1861,7 +1853,7 @@
         "required": true,
         "types": [
           {
-            "type": "function_pointer_arguments",
+            "type": "function_pointer_argument_list",
             "named": true
           }
         ]
@@ -2173,6 +2165,32 @@
     }
   },
   {
+    "type": "keyword_parameter",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "keyword_pattern",
     "named": true,
     "fields": {},
@@ -2261,7 +2279,7 @@
         "required": false,
         "types": [
           {
-            "type": "lambda_arguments",
+            "type": "lambda_argument_list",
             "named": true
           }
         ]
@@ -2279,7 +2297,7 @@
     }
   },
   {
-    "type": "lambda_arguments",
+    "type": "lambda_argument_list",
     "named": true,
     "fields": {},
     "children": {
@@ -2548,6 +2566,10 @@
       "types": [
         {
           "type": "infer_only_marker",
+          "named": true
+        },
+        {
+          "type": "keyword_parameter",
           "named": true
         },
         {
@@ -2889,22 +2911,22 @@
           }
         ]
       },
+      "parameters": {
+        "multiple": false,
+        "required": false,
+        "types": [
+          {
+            "type": "parameter_list",
+            "named": true
+          }
+        ]
+      },
       "traits": {
         "multiple": false,
         "required": false,
         "types": [
           {
             "type": "call_argument_list",
-            "named": true
-          }
-        ]
-      },
-      "type_parameters": {
-        "multiple": false,
-        "required": false,
-        "types": [
-          {
-            "type": "parameter_list",
             "named": true
           }
         ]
