@@ -176,7 +176,7 @@ def main():
       (call
         function: (identifier)
         parameters: (parameter_list
-          (keyword_parameter
+          (named_parameter
             name: (type
               (identifier))
             value: (type

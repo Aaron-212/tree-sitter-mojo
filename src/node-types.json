@@ -2165,32 +2165,6 @@
     }
   },
   {
-    "type": "keyword_parameter",
-    "named": true,
-    "fields": {
-      "name": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      },
-      "value": {
-        "multiple": false,
-        "required": true,
-        "types": [
-          {
-            "type": "type",
-            "named": true
-          }
-        ]
-      }
-    }
-  },
-  {
     "type": "keyword_pattern",
     "named": true,
     "fields": {},
@@ -2510,6 +2484,32 @@
     }
   },
   {
+    "type": "named_parameter",
+    "named": true,
+    "fields": {
+      "name": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      },
+      "value": {
+        "multiple": false,
+        "required": true,
+        "types": [
+          {
+            "type": "type",
+            "named": true
+          }
+        ]
+      }
+    }
+  },
+  {
     "type": "not in",
     "named": false,
     "fields": {}
@@ -2569,7 +2569,7 @@
           "named": true
         },
         {
-          "type": "keyword_parameter",
+          "type": "named_parameter",
           "named": true
         },
         {

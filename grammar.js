@@ -422,7 +422,7 @@ export default grammar({
       seq(
         "[",
         commaSep1(
-          choice($.type, $.infer_only_marker, $.keyword_parameter)
+          choice($.type, $.infer_only_marker, $.named_parameter)
         ),
         optional(","),
         "]"
@@ -1048,7 +1048,7 @@ export default grammar({
         field("value", $.expression)
       ),
 
-    keyword_parameter: ($) =>
+    named_parameter: ($) =>
       seq(field("name", $.type), "=", field("value", $.type)),
 
     // Literals

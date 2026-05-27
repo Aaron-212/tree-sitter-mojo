@@ -1769,7 +1769,7 @@
                 },
                 {
                   "type": "SYMBOL",
-                  "name": "keyword_parameter"
+                  "name": "named_parameter"
                 }
               ]
             },
@@ -1795,7 +1795,7 @@
                       },
                       {
                         "type": "SYMBOL",
-                        "name": "keyword_parameter"
+                        "name": "named_parameter"
                       }
                     ]
                   }
@@ -5317,7 +5317,7 @@
         }
       ]
     },
-    "keyword_parameter": {
+    "named_parameter": {
       "type": "SEQ",
       "members": [
         {
